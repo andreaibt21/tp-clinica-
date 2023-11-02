@@ -1,0 +1,35 @@
+<br><br><br><br><br><br>
+<div class="rounded container bg-light">
+  <div class="row  align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img
+        src="../../../assets/logo.png"
+        class="d-block mx-lg-auto img-fluid"
+        alt="Bootstrap Themes"
+        width="50%"
+        loading="lazy"
+      />
+    </div>
+    <div class="col-lg-6" >
+      <h1 class="display-5 fw-bold lh-1 mb-3">Clínica de Andrea</h1>
+      <p class="lead">
+        Bienvenido a la Clínica <i class="bi bi-bandaid"></i>.
+      </p>
+      <p class="lead">Acceda para poder gestionar sus turnos.<br /></p>
+      <p class="lead">¡Bienvenido!</p>
+      <div
+        *ngIf="logueado | async as user; else then_content"
+        class="d-grid gap-2 d-md-flex justify-content-md-start"
+      ></div>
+      <ng-template #then_content>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg px-4 me-md-2"
+          (click)="acceso()"
+        >
+          Acceso
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

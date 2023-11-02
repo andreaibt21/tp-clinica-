@@ -1,0 +1,49 @@
+@import "bootstrap/scss/bootstrap";
+//@import "../node_modules/simple-keyboard/build/css/index.css";
+/* You can add global styles to this file, and also import other style files */
+$base-color: #c6538c;
+$amarillo-base: #dba905;
+$amarillo-claro: #e1fd74;
+
+body {
+  background-color: $amarillo-base;
+}
+/* Importing Bootstrap SCSS file. */
+
+.botonHover {
+  background-color: $amarillo-claro;
+  color: #24261a;
+  padding: 12px 10px;
+  border: 1px solid black;
+  border-radius: 54px;
+  cursor: pointer;
+  margin: 0px 10px;
+  font-weight: bold;
+  width: 150px;
+  transition: background-color 0.3s ease-in-out !important;
+}
+
+button:hover {
+  background-color: transparent;
+  border: 1px solid $amarillo-claro;
+  color: #fff;
+}
+
+button {
+  background-color: $amarillo-claro;
+  color: #24261a;
+  padding: 12px 10px;
+  border: 1px solid black;
+  border-radius: 54px;
+  cursor: pointer;
+  margin: 10px 0;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: transparent;
+  border: 1px solid $amarillo-claro;
+  color: #fff;
+}

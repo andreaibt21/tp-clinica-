@@ -1,0 +1,55 @@
+@import "bootstrap/scss/bootstrap";
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  margin: 20px;
+  img {
+    padding: 5px;
+    height: 250px;
+    width: 150px;
+  }
+}
+h1 {
+  color: #dba905;
+}
+
+button {
+  background-color: #e1fd74;
+  color: #24261a;
+  padding: 12px 10px;
+  border: 1px solid black;
+  border-radius: 54px;
+  cursor: pointer;
+  margin: 10px 0;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: black;
+  border: 1px solid #e1fd74;
+  color: #fff;
+}

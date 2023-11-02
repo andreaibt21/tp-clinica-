@@ -1,0 +1,33 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <p
+      class="navbar-brand"
+      href="#"
+      *ngIf="usuarioLogueado | async as usuarioLogueado"
+      (click)="handleVerificarUsuario()"
+    >
+      {{ usuarioLogueado.email }}
+    </p>
+    <div style=" display: flex; flex-wrap: wrap;   align-items:center; gap: 10px">
+
+    <img src="../../../assets/logo.png" alt="logo" width="25px" height="25px"display="inline"/>
+
+    <p class="navbar-brand" href="#"  display="inline">Clinica de Andrea</p>
+  </div>
+    <div *ngIf="usuarioLogueado | async as usuarioLogueado; else then_content">
+      <button class="botonHover" (click)="handleCerrar()">Cerrar Sesión</button>
+      <button class="botonHover" (click)="handleAtras()">Atrás</button>
+    </div>
+
+    <ng-template #then_content>
+      <div class="Acceso">
+        <button class="botonHover" type="submit" routerLink="/login">
+          Login
+        </button>
+        <button class="botonHover" type="submit" routerLink="/registro">
+          Registro
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</nav>

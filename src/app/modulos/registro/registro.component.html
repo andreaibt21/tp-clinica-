@@ -1,0 +1,206 @@
+
+<br> <br> <br>
+<div  *ngIf="!rol; else then_content">
+
+ <app-pre-registro (rol)="setRol($event)" (esAdmin)="setEsAdmin($event)"></app-pre-registro>
+</div>
+<ng-template #then_content>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <div class="container bg-dark rounded animate__animated animate__backInRight">
+    <main>
+      <div class="py-5 text-center">
+        <h2>Registro {{this.rol}}</h2>
+      </div>
+      <div class="row g-6">
+        <form [formGroup]="form" (ngSubmit)="crearUsuario()" class="needs-validation" novalidate>
+
+
+          <div class="row g-3">
+            <div class="col">
+              <label for="firstName" class="form-label">Nombre</label>
+              <input
+                formControlName="nombre"
+                type="text"
+                class="form-control"
+                id="nombre"
+                placeholder=""
+                value=""
+                required>
+              <small class="errorMessage"
+                   *ngIf="getValue('nombre')?.invalid && (getValue('nombre').touched || getValue('nombre').dirty)">
+                Introduzca un nombre válido.
+              </small>
+            </div>
+
+            <div class="col">
+              <label for="apellido" class="form-label">Apellido</label>
+              <input
+                  formControlName="apellido"
+                  type="text"
+                  class="form-control"
+                  id="apellido"
+                  placeholder=""
+                  value=""
+                  required>
+              <small class="errorMessage"
+                *ngIf="getValue('apellido')?.invalid && (getValue('apellido').touched || getValue('apellido').dirty)">
+                Introduzca un apellido válido.
+            </small>
+            </div>
+
+            <div class="col">
+              <label for="edad" class="form-label">Edad </label>
+              <input
+                formControlName="edad"
+                type="number"
+                class="form-control"
+                id="edad"
+                placeholder=""
+                required>
+              <small class="errorMessage"
+                    *ngIf="getValue('edad')?.invalid && (getValue('edad').touched || getValue('edad').dirty)">
+                Introduzca una edad válida.
+              </small>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col">
+              <label for="dni" class="form-label">DNI</label>
+              <input
+                formControlName="dni"
+                type="text"
+                class="form-control"
+                id="dni"
+                required>
+              <small class="errorMessage"
+                    *ngIf="getValue('dni')?.invalid && (getValue('dni').touched || getValue('dni').dirty)">
+                Introduzca un DNI válido.
+              </small>
+            </div>
+            <div class="col" *ngIf="this.rol == 'Paciente'">
+              <label for="obraSocial" class="form-label">Obra social</label>
+              <input
+                formControlName="obraSocial"
+                type="text"
+                class="form-control"
+                id="obraSocial">
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col">
+              <label for="email" class="form-label">Email</label>
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control"
+                id="email"
+                required>
+              <small class="errorMessage"
+                  *ngIf="getValue('email')?.invalid && (getValue('email').touched || getValue('email').dirty)">
+                  Introduzca un mail válido.
+            </small>
+            </div>
+
+            <div class="col">
+              <label for="password" class="form-label">Contraseña</label>
+              <input
+                  formControlName="password"
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  required>
+              <small class="errorMessage"
+                *ngIf="getValue('password')?.invalid && (getValue('password').touched || getValue('password').dirty)">
+                Introduzca una contraseña.
+              </small>
+            </div>
+
+
+            <div class="row g-3">
+            <!-- solo para registrar médicos -->
+            <!-- <div class="col-6" *ngIf="this.rol == 'Especialista'">
+              <label for="especialidad" class="form-label">Especialidad</label>
+              <select
+                formControlName="especialidad"
+                class="form-select"
+                id="especialidad"
+                required>
+                  <option value="">Elija una opción...</option>
+                  <option>Gastroenterología</option>
+                  <option>Oftalmología</option>
+                  <option>Dermatología</option>
+                  <option>Otra...</option>
+              </select>
+            </div> -->
+            <div class="col " *ngIf="this.rol == 'Especialista'">
+              <label for="especialidad" class="form-label">Especialidad</label>
+              <div class="form-check">
+                <input formControlName="gastroenterologia" type="checkbox" class="form-check-input" id="gastroenterologia">
+                <small class="form-check-label" for="save-info">Gastroenterología</small>
+              </div>
+
+              <div class="form-check">
+                <input formControlName="ginecologia" type="checkbox" class="form-check-input" id="ginecologia">
+                <small class="form-check-label" for="save-info">Ginecología</small>
+              </div>
+
+              <div class="form-check">
+                <input formControlName="clinica" type="checkbox" class="form-check-input" id="clinica">
+                <small class="form-check-label" for="save-info">Clínica</small>
+              </div>
+            </div>
+
+              <div class="col " *ngIf="this.rol == 'Especialista'">
+                <label for="especialidad" class="form-label">Otra especialidad</label>
+                <input
+                    formControlName="especialidad"
+                    type="text"
+                    class="form-control"
+                    id="especialidad">
+                <div class="invalid-feedback">
+                </div>
+              </div>
+</div>
+            <!-- solo para registrar pacientes -->
+
+            <div class="col-12">
+              <label for="imagenUno" class="form-label">Imagen</label>
+              <input
+                formControlName="imagenUno"
+                type="file"
+                class="form-control"
+                id="imagenUno"
+                (change)="cargarImagen($event)">
+            </div>
+            <div class="col-12" *ngIf="this.rol == 'Paciente'">
+              <label for="imagenDos" class="form-label">Imagen</label>
+              <input
+                formControlName="imagenDos"
+                type="file"
+                class="form-control"
+                id="imagenDos"
+                (change)="cargarImagen($event)">
+              <div class="invalid-feedback">
+              </div>
+            </div>
+</div>
+          <hr class="my-4"en>
+          <button  type="submit">REGISTRAR</button>
+          <!-- <hr class="my-4"> -->
+          <br>
+          <br>
+          <button (click)="atras()">ATRÁS</button>
+        </form>
+      </div>
+    </main>
+  </div>
+</ng-template>
+
+

@@ -1,0 +1,22 @@
+//@import "../../../styles.scss";
+
+
+button {
+  background-color:  #e1fd74;
+  color: #24261a;
+  padding: 12px 10px;
+  border: 1px solid black;
+  border-radius: 54px;
+  cursor: pointer;
+  margin: 10px 0;
+  font-weight: bold;
+  width: 150px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: black;
+  border: 1px solid  #e1fd74;
+  color: #fff;
+}
+
