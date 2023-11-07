@@ -12,11 +12,17 @@
         <input type="password"  id="floatingPassword" placeholder="Password" formControlName="password">
       </div>
       <button  type="submit">Entrar</button>
+      <div *ngIf="this.mostrar" class="cell">
+        <div class="circle loader"></div>
+      </div>
+
       <p></p>
-      <!-- <div class="btn-group" role="group">
-        <button type="button" class="btn btn-secondary" type="submit" (click)="accesoAdmin()">Admin</button>
-        <button type="button" class="btn btn-secondary" type="submit" (click)="accesoEmpleado()">Empleado</button>
-      </div> -->
+      <div  role="group">
+        <h3>Accesos directos</h3>
+        <button type="button" type="submit" (click)="AccesoDirectoAdmin()"> Admin</button>
+        <button type="button"  type="submit"(click)="AccesoDirectoEspecialista()"> Especialista</button>
+        <button type="button" type="submit" (click)="AccesoDirectoPaciente1()"> Paciente 1</button>
+      </div>
       <br>
       <br>
     </form>

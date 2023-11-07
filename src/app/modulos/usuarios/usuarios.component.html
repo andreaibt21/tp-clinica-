@@ -1,0 +1,38 @@
+
+  <body>
+    <div class="container py-3">
+      <div class="p-4 mb-4 bg-dark rounded-3">
+      <header>
+        <br>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+          <h1 class="display-4 fw-normal">Listado de Usuarios </h1>
+
+            <div class="btn-group" role="group">
+              <button type="button"  type="submit" class="izquierda" (click)="asignarTipoUserVerificado('Admin')">Admin</button>
+              <button type="button" class="medio" type="submit" (click)="asignarTipoUserVerificado('Paciente')">Paciente</button>
+              <button type="button"  class="medio"  type="submit" (click)="asignarTipoUserVerificado('Especialista')">Especialistas verificados</button>
+              <button type="button"  class="derecha"  type="submit" (click)="asignarTipoUserVerificado('EspecialistaNV')">Especialista No verificados</button>
+            </div> <br>
+            <br><button *ngIf="this.visualizacion =='cards'" type="button"  type="submit" (click)="setVisualizacion('lista')">Ver vista de Lista</button>
+          <button *ngIf="this.visualizacion =='lista'" type="button"  type="submit" (click)="setVisualizacion('cards')">Ver vista de Tarjetas</button>
+          <app-spinner></app-spinner>
+          <div *ngIf="this.visualizacion == 'lista'" class="pricing-header p-3 pb-md-4 mx-auto text-center">
+            <app-lista-usuarios [listaItems]="listaItems"
+                                [tipoUser]="tipoUser"
+                                [verificado]="verificado">
+            </app-lista-usuarios>
+          </div>
+          <div *ngIf="this.visualizacion == 'cards'" class="pricing-header p-3 pb-md-4 mx-auto text-center">
+
+            <app-cards-usuarios [listaItems]="listaItems"
+                                [tipoUser]="tipoUser"
+                                [verificado]="verificado"
+                                [origen]="'admin'">
+            </app-cards-usuarios>
+          </div>
+        </div>
+      </header>
+    </div>
+    </div>
+  </body>
+

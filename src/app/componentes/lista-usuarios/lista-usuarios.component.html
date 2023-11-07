@@ -1,0 +1,115 @@
+<main role="main">
+  <br />
+  <div
+    *ngIf="this.verTodos == true; else filtrados"
+    class="btn-group"
+    role="group"
+    aria-label="Basic example"
+  >
+    <button
+      type="button"
+      (click)="setVerTodos(false)"
+      class="btn btn-outline-secondary btn-sm"
+    >
+      Filtrados <i class="bi bi-eye"></i>
+    </button>
+    <button
+      type="button"
+      (click)="descargarUsers()"
+      class="btn btn-outline-success btn-sm"
+    >
+      Descargar <i class="bi bi-file-earmark-excel"></i>
+    </button>
+  </div>
+  <ng-template #filtrados>
+    <small>Seleccione un filtro para ver.</small>
+    <br /><button
+      type="button"
+      (click)="setVerTodos(true)"
+      class="btn btn-outline-secondary btn-sm"
+    >
+      Todos <i class="bi bi-eye"></i>
+    </button>
+  </ng-template>
+  <br />
+  <br />
+  <div *ngIf="this.verTodos == false">
+    <table class="table table-striped table-dark" style="width: 100%; align-self: center">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Dni</th>
+          <th>Mail</th>
+          <th *ngIf="verificado == 'false'">Botón</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of listaItems">
+        <tr *ngIf="item.rol == this.tipoUser && item.verificado == verificado">
+          <td>
+            {{ item.nombre }}
+          </td>
+          <td>
+            {{ item.apellido }}
+          </td>
+          <td>
+            {{ item.dni }}
+          </td>
+          <td>
+            {{ item.email }}
+          </td>
+          <td *ngIf="item.verificado == 'false'">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              (click)="verificarUsuario(item.email)"
+            >
+              Aprobar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="verTodos == true">
+    <table
+      class="table table-dark table-striped "
+      style="width: 100%; align-self: center"
+      id="users-table"
+    >
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Dni</th>
+          <th>Mail</th>
+          <th>Rol</th>
+          <th>Edad</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of listaItems">
+        <tr>
+          <td>
+            {{ item.nombre }}
+          </td>
+          <td>
+            {{ item.apellido }}
+          </td>
+          <td>
+            {{ item.dni }}
+          </td>
+          <td>
+            {{ item.email }}
+          </td>
+          <td>
+            {{ item.rol }}
+          </td>
+          <td>
+            {{ item.edad }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

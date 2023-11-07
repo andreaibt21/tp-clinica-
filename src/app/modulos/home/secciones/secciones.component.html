@@ -4,10 +4,42 @@
   <h1></h1>
 
   <div class="button-container">
-    <button type="submit" (click)="handleJuegos()">JUEGOS</button>
 
-    <button type="submit" (click)="handleChat()">CHAT</button>
+      <!-- Enlaces -->
 
-    <button type="submit" (click)="handleQuiensoy()">QUIEN SOY</button>
+        <button class="nav-item" *ngIf="logueado|async as user" routerLink="mi-perfil">
+          Mi perfil
+        </button>
+        <!-- ADMIN -->
+          <button  class="nav-item" *ngIf="this.st.usuarioObj.rol == 'Admin'" routerLink="/usuarios">
+            Usuarios
+          </button>
+          <button  class="nav-item" *ngIf="this.st.usuarioObj.rol == 'Admin'" routerLink="/cancelar-turno">
+            Turnos
+          </button>
+          <button  class="nav-item" *ngIf="this.st.usuarioObj.rol == 'Admin' || this.st.usuarioObj.rol == 'Paciente'" routerLink="/sacar-turno">
+            Sacar turno
+          </button>
+          <button  class="nav-item" *ngIf="this.st.usuarioObj.rol == 'Admin'" routerLink="/informes">
+            Informes
+          </button>
+          <button  class="nav-item" *ngIf="this.st.usuarioObj.rol == 'Paciente'" routerLink="/gestion-turno-pac">
+            Mis turnos
+          </button>
+          <button  class="nav-item" *ngIf="this.st.usuarioObj.rol == 'Especialista'" routerLink="/gestion-turno-espta">
+              Mis turnos
+          </button>
+          <button  class="nav-item" *ngIf="this.st.usuarioObj.rol == 'Especialista'" routerLink="/pacientes">
+            Pacientes
+          </button>
+          <button *ngIf="this.st.usuarioObj.rol == 'Admin'" type="button" class="btn btn-light me-2" routerLink="/registro">Registro</button>
+
+
+
+
+
+
+
+
   </div>
 </div>

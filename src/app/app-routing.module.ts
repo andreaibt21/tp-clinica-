@@ -42,15 +42,19 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modulos/home/home.module').then((mod) => mod.HomeModule),
   },
-  
+  {
+    path: 'usuarios',
+    loadChildren: () =>
+      import('./modulos/usuarios/usuarios.module').then((mod) => mod.UsuariosModule),
+  },
   {
     path: 'error',
     component: ErrorComponent,
   },
-  {
-    path: '**',
-    component: VerificadaComponent,
-  },
+  // {
+  //   path: '**',
+  //   component: VerificadaComponent,
+  // },
   { path: '**', component: Error404Component },
 ];
 

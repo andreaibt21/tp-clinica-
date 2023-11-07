@@ -38,9 +38,9 @@ export class AuthService {
             querySnapshot.forEach((doc) => {
               if (doc.data()['verificado'] == 'true') {
                 if (user.user?.emailVerified == true) {
-                  console.log("aaaa")
+                  console.log('¡Bienvenid@ ' + doc.data()['nombre'] + '!');
                   this.alerta.lanzarAlertaExito(
-                    '¡Bienvenido ' + doc.data()['nombre'] + '!'
+                    '¡Bienvenid@ ' + doc.data()['nombre'] + '!'
                   );
                   this.router.navigate(['/home']);
                   this.st.getUser(email);
@@ -50,11 +50,10 @@ export class AuthService {
                 } else {
                   this.alerta.lanzarAlertaError('Confirme primero su mail.');
                   this.logout('/login');
-                  console.log("aaaa else")
-
+                  console.log('aaaa else');
                 }
               } else {
-                console.log("aaaa 2")
+                console.log('aaaa 2');
 
                 this.alerta.lanzarAlertaError(
                   'Espere a que un admin apruebe su usuario.'
@@ -65,13 +64,13 @@ export class AuthService {
             });
           })
           .catch((error) => {
-            console.log("aaaa cat")
+            console.log('aaaa cat');
 
             console.log('Error buscando: ', error);
           });
       })
       .catch((error) => {
-        console.log("aaaa error", error)
+        console.log('aaaa error', error);
 
         this.alerta.lanzarAlertaError(this.error(error.code));
       });
@@ -83,10 +82,10 @@ export class AuthService {
       // URL must be whitelisted in the Firebase Console.
       // url: `${window.location.protocol}//${window.location.host}/`,
       url: `http://clinica-tp-utn.firebaseapp.com/`,
-      apiKey: "AIzaSyAE_9PLW4nIs-4aGriqtWiWw-GrfRMW0k4",
+      apiKey: 'AIzaSyAE_9PLW4nIs-4aGriqtWiWw-GrfRMW0k4',
       // This must be true.
-      handleCodeInApp: true
-    }
+      handleCodeInApp: true,
+    };
     console.log(archivos);
     this.afauth
       .createUserWithEmailAndPassword(usuario.email, usuario.password)
@@ -99,7 +98,6 @@ export class AuthService {
         this.st.addUsuario(usuario, archivos);
       })
       .catch((error) => {
-
         this.alerta.lanzarAlertaError(this.error(error.code));
       });
   }
@@ -115,18 +113,64 @@ export class AuthService {
   }
 
   error(error: string) {
-
-    console.log(error)
+    console.log(error);
     switch (error) {
-      case 'auth/wrong-password':
-      case 'auth/user-not-found':
       case 'auth/invalid-email':
-        return 'Datos incorrectos.';
+        console.log('Correo inválido');
+        return 'Correo inválido';
         break;
       case 'auth/email-already-in-use':
+        console.log('Este correo ya está registrado');
+        return 'Este correo ya está registrado';
+        break;
+      case 'auth/email-already-exists':
+        console.log('Este correo ya está registrado');
+        return 'Este correo ya está registrado';
+        break;
+      case 'auth/invalid-password':
+        console.log('Contraseña inválida');
+        return 'Contraseña inválida';
+        break;
+      case 'auth/weak-password':
+        console.log(
+          'Error, ingrese una contraseña que tenga mas de 5 carácteres'
+        );
+        return 'Error, ingrese una contraseña que tenga mas de 5 carácteres';
+        break;
+
+      case 'auth/internal-error':
+        console.log('Error interno');
+        return 'Error interno';
+        break;
+      case 'auth/too-many-requests':
+        console.log('Muchas llamadas en poco tiempo');
+        return 'Muchas llamadas en poco tiempo';
+        break;
+      case 'auth/missing-password':
+        console.log('Ingrese la contraseña');
+        return 'Ingrese la contraseña';
+        break;
+      case 'auth/user-not-found':
+      case 'auth/invalid-login-credentials':
+        console.log('Usuario no encontrado');
+        return 'Usuario no encontrado';
+
+        break;
+      case 'auth/wrong-password':
+        console.log('Contraseña incorrecta.');
+        return 'Contraseña incorrecta.';
+        break;
+      case 'auth/invalid-email':
+        console.log('El mail incorrecto.');
+        return 'El mail incorrecto.';
+        break;
+      case 'auth/email-already-in-use':
+        console.log('El mail ya está en uso.');
         return 'El mail ya está en uso.';
         break;
+
       default:
+        console.log('Error desconocido');
         return 'Error desconocido';
         break;
     }

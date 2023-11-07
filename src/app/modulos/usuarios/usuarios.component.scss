@@ -1,0 +1,33 @@
+@import "../../../styles.scss";
+.container{
+  color: white;
+}
+button {
+  background-color: $amarillo-claro;
+  color: #24261a;
+  padding: 12px 10px;
+  border: 1px solid black;
+  border-radius: 54px;
+  cursor: pointer;
+  margin: 10px 0;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: transparent;
+  border: 1px solid $amarillo-claro;
+  color: #fff;
+}
+.medio{
+  border-radius: 0px;
+}
+.derecha{
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.izquierda{
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}

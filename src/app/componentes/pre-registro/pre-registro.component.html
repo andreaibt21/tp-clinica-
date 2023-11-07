@@ -1,7 +1,7 @@
     <div class="container bg-dark rounded">
       <h1 >Registro</h1>
       <div class="d-flex  ">
-        <div >
+
           <div class="card shadow-sm tarjeta" >
             <img class="bd-placeholder-img card-img-top" src="../assets/paciente.png" alt="paciente" >
             <div class="card-body">
@@ -14,8 +14,7 @@
               </div>
             </div>
           </div>
-        </div>
-        <div >
+
           <div class="card shadow-sm tarjeta" >
             <img class="bd-placeholder-img card-img-top" src="../assets/especialista.png" alt="especialista" >
             <div class="card-body">
@@ -27,10 +26,10 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="col"  *ngIf="this.st.usuarioObj.rol == 'Admin'">
-          <div class="card shadow-sm" style="width: 18rem;">
-            <img class="bd-placeholder-img card-img-top" src="../assets/admin.jpeg" alt="" width="30%" height="30%">
+
+
+          <div class="card shadow-sm tarjeta" *ngIf="this.st.usuarioObj.rol == 'Admin'" >
+            <img class="bd-placeholder-img card-img-top" src="../assets/admin.png" id="admin">
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center">
                   <button type="button" (click)="registrar('Admin')"
@@ -41,6 +40,6 @@
               </div>
             </div>
           </div>
-        </div>
+
       </div>
     </div>

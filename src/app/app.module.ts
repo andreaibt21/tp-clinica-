@@ -25,6 +25,7 @@ import { StorageService } from './services/storage.service';
 
 
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAE_9PLW4nIs-4aGriqtWiWw-GrfRMW0k4",
   authDomain: "clinica-tp-utn.firebaseapp.com",
@@ -41,6 +42,8 @@ const firebaseConfig = {
     Error404Component,
     NavbarComponent,
     InicioComponent,
+
+
 
 
   ],

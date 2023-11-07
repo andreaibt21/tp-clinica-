@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-home-espera',
   templateUrl: './home-espera.component.html',
-  styleUrls: ['./home-espera.component.css']
+  styleUrls: ['./home-espera.component.scss']
 })
 export class HomeEsperaComponent implements OnInit {
 

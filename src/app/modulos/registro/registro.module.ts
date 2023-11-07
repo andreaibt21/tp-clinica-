@@ -7,7 +7,11 @@ import { RegistroRoutingModule } from './registro-routing.module';
 import { PreRegistroComponent } from 'src/app/componentes/pre-registro/pre-registro.component';
 
 @NgModule({
-  imports: [CommonModule, RegistroRoutingModule, FormsModule, ReactiveFormsModule,
+  imports: [
+    CommonModule,
+    RegistroRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [RegistroComponent],
   declarations: [RegistroComponent, PreRegistroComponent],

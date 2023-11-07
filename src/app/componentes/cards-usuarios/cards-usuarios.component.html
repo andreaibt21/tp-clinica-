@@ -1,0 +1,54 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
+<div *ngIf="this.verHistoria == false">
+<h1 *ngIf="this.origen=='admin'">{{this.tipoUser}}</h1>
+    <!-- <div *ngFor="let item of listaItems" class="animate__animated animate__backInUp"> -->
+      <!-- <div class="row row-cols-1 row-cols-md-3 mb-3 text-center d-flex justify-content-center"> -->
+      <!-- <div  *ngIf="item.rol == this.tipoUser && item.verificado == verificado"> -->
+        <!-- <div class="col">   -->
+   <div class="container">
+    <div class="row">
+
+    <div class="col-md-3 mx-auto m-5" *ngFor="let item of listaItems" class="animate__animated animate__backInUp">
+      <!-- <div  *ngIf="item.rol == this.tipoUser && item.verificado == verificado" > -->
+            <div class="card-block m-3 card mb- rounded-3 shadow-sm col-sm-6 " *ngIf="item.rol == this.tipoUser && item.verificado == verificado" >
+            <div class="card-header py-3">
+              <h5 class="my-0 fw-normal ">{{item.nombre}} {{item.apellido}}</h5>
+            </div>
+            <div class="w-100 card-body">
+              {{item.email}}
+              <br>{{item.dni}}
+              <br>
+              <!-- <div *ngFor="let t of this.listaTurnos; index as i">
+                <div *ngIf="i < 4 && t.pacEmail == item.email && t.estado == 'finalizado'">
+                  <small> {{t | fechahoraturno }}</small>
+                </div>
+              </div> -->
+              <br>
+              <div class="w-100 btn-group" *ngIf="tipoUser=='Paciente'" role="group" aria-label="Basic example">
+                <button (click)="this.getTurnosPorUser(item.email)"   type="button" class="w-100 btn btn-sm btn-info">Turnos <i class="bi bi-eye"></i> </button>
+                <button (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-secondary">Historial <i class="bi bi-info-circle"></i></button>
+                <button (click)="this.descargarTurnos(item.email)"   type="button" class="w-100 btn btn-sm btn-danger">Turnos <i class="bi bi-file-pdf"></i></button>
+              </div>
+              <!-- <button *ngIf="tipoUser=='Paciente'" (click)="this.getTurnosPorUser(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver últimos turnos</button>
+              <br>
+              <button *ngIf="tipoUser=='Paciente'" (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver historial</button> -->
+              <button *ngIf="item.verificado =='false'" type="button" class="w-100 btn btn-sm btn-success"   (click)="verificarUsuario(item.email)">Aprobar <i class="bi bi-shield-check"></i></button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      </div>
+  <!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+
+<div *ngIf="this.verHistoria == true">
+  <!-- <app-historia-clinica [historia]="historia" [origen]="'admin'"></app-historia-clinica> -->
+  <button type="button" class="btn btn-danger btn-sm" (click)="this.setVerHistoria(false)">Volver</button>
+</div>
