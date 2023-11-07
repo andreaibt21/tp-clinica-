@@ -2,14 +2,14 @@
   <div class="rounded container "> <br>
     <form (ngSubmit)="login()" [formGroup]="loginUsuario" id="login-form">
       <img class="mb-4" src="../../../assets/logo.png" alt="" width="30%" height="30%">
-      <h1 class="h3 mb-3 fw-normal">¡Hola!</h1>
+      <h1 class="h3 mb-3 fw-normal">Inicie sesión</h1>
       <div class="input-container">
         <label for="floatingInput">Email</label>
-        <input type="email"  id="floatingInput" placeholder="name@example.com" formControlName="email">
+        <input type="email"  id="floatingInput" placeholder="******@mail.com" formControlName="email">
       </div>
       <div class="input-container">
         <label for="floatingPassword">Contraseña</label>
-        <input type="password"  id="floatingPassword" placeholder="Password" formControlName="password">
+        <input type="password"  id="floatingPassword" placeholder="******" formControlName="password">
       </div>
       <button  type="submit">Entrar</button>
       <div *ngIf="this.mostrar" class="cell">
