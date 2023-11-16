@@ -1,0 +1,157 @@
+<body>
+  <div class="container py-3">
+    <div class="p-4 mb-4 rounded-3">
+      <header>
+        <br />
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+          <h1 class="display-4 fw-normal">Turnos</h1>
+
+          <div class="d-flex justify-content-center seccion-botones">
+          <button
+            type="button"
+            (click)="this.traerTurnos()"
+            id="listacompleta"
+          >
+            Lista completa
+          </button>  <p class="fs-5 m-2">Filtrar por:</p>
+            <select
+              (change)="onChange(campoForm.value)"
+              #campoForm
+              class=""
+              data-bs-toggle="dropdown"
+            >
+            <option value="esptaNombre">Nombre del especialista</option>
+            <option value="esptaApellido">Apellido del especialista</option>
+            <option value="especialidad">Especialidad</option>
+             <!-- <option value="dia">Fecha</option>
+              <option value="diaSemana">Día de la Semana</option>
+              <option value="hora">Hora</option>
+              <option value="esptaDni">DNI del especialista</option>
+
+              <option value="estado">Estado</option> -->
+            </select>
+            <div
+              *ngIf="
+                campoAMostrar == 'esptaDni' ||
+                campoAMostrar == 'esptaApellido' ||
+                campoAMostrar == 'esptaNombre'
+              "
+            >
+              <div class="d-flex justify-content-center">
+                <div class="input-group-prepend">
+                  <button
+                    type="button"
+                    (click)="this.buscar(campoAMostrar, valor.value.trim())"
+                  >
+                    Buscar
+                  </button>
+                </div>
+                <input
+                  (keyup.enter)="this.buscar(campoAMostrar, valor.value.trim())"
+                  #valor
+                  type="text"
+                  class="inputdato"
+                  placeholder=""
+                  aria-label=""
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+            </div>
+
+            <!-- dia semana -->
+            <div *ngIf="campoAMostrar == 'diaSemana'">
+              <select
+                (change)="onChangeDiaSemana(diaSemana.value)"
+                #diaSemana
+                class="opciones"
+                data-bs-toggle="dropdown"
+              >
+                <option value=""></option>
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miércoles">Miércoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sábado">Sábado</option>
+              </select>
+            </div>
+            <!-- estado -->
+            <div *ngIf="campoAMostrar == 'estado'">
+              <select
+                (change)="onChangeEstado(estado.value)"
+                #estado
+                class="opciones"
+                data-bs-toggle="dropdown"
+              >
+                <option value=""></option>
+                <option value="nuevo">Nuevo</option>
+                <option value="aceptado">Aceptado</option>
+                <option value="finalizado">Finalizado</option>
+              </select>
+            </div>
+            <!-- fecha -->
+            <div *ngIf="campoAMostrar == 'dia'">
+              <select
+                (change)="onChangeFecha(fecha.value)"
+                #fecha
+                class="opciones"
+                data-bs-toggle="dropdown"
+              >
+                <option *ngFor="let f of listaFechas" value="{{ f }}">
+                  {{ f }}
+                </option>
+              </select>
+            </div>
+            <div *ngIf="campoAMostrar == 'hora'">
+              <select
+                (change)="onChangeHora(hora.value)"
+                #hora
+                class="opciones"
+                data-bs-toggle="dropdown"
+              >
+                <option *ngFor="let h of listaHoras.sort()" value="{{ h }}">
+                  {{ h }}
+                </option>
+              </select>
+            </div>
+          </div>
+ <!-- especialidad -->
+            <div
+              *ngIf="campoAMostrar == 'especialidad'"
+              class="especialidad"
+              role="group"
+              aria-label="Basic example"
+            >
+              <div *ngFor="let esp of listaEspecialidades">
+                <button
+                  (click)="buscar('especialidad', esp)"
+                  type="button"
+                  class="esp"
+                >
+                  {{ esp }}
+                </button>
+              </div>
+            </div>
+
+
+          <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+            <app-tabla-turnos
+              [listaItems]="listaTurnosOk"
+              [filtroEsp]="filtroEsp"
+              [rol]="'pac'"
+              [campo]="this.campo"
+              [valor]="this.valor"
+            >
+            </app-tabla-turnos>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+</body>
+
+<datalist id="times">
+  <div *ngFor="let f of listaFechas">
+    <option value="{{ f }}"></option>
+  </div>
+</datalist>

@@ -1,0 +1,46 @@
+
+.inputdato {
+  border-radius: 10px;
+  height: 50px;
+}
+button {
+  width: 150px;
+  margin: 0;
+}
+.seccion-botones {
+  margin-top: 10px;
+  height: 50px;
+  div {
+    margin: 0 10px;
+  }
+}
+select {
+  background-color: black !important;
+  color: white !important;
+
+  border-radius: 10px !important;
+  padding: 5px !important;
+}
+
+.opciones {
+  width: 150px;
+  height: 50px;
+}
+#listacompleta {
+  background-color: rgb(64, 179, 18);
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+  &:hover {
+    background-color: black;
+    border: 1px solid white;
+    color: #fff;
+  }
+}
+.esp {
+  width: 180px;
+}
+.especialidad {
+  div {
+    margin: 10px;
+  }
+}

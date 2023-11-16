@@ -26,6 +26,49 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
+    this.alerta.lanzarAlertaLoading();
+    firebase
+      .firestore()
+      .collection('usuarios')
+      .where('email', '==', email)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data()['verificado'] == 'true') {
+            console.log('doc.data()', doc.data());
+            this.st.getUser(email);
+            this.st.getImages(email);
+            this.st.getImagenes(email);
+            this.afauth
+                      .signInWithEmailAndPassword(email, password)
+                      .then((user) => {
+                          if (user.user?.emailVerified == true) {
+                            console.log('yaverificó');
+                            this.router.navigate(['/home']);
+                          } else {
+                            console.log('no verificó');
+                            this.logout('/home-espera');
+
+                          }
+                        })
+                        .catch((error) => {
+                          this.alerta.lanzarAlertaError(this.error(error.code));
+                        });
+          } else {
+            console.log('else no verificado');
+            this.alerta.lanzarAlertaError(
+              'Espere a que un admin apruebe su usuario.'
+            );
+          }
+        });
+      })
+      .catch((error) => {
+       console.log('Error buscando: ', error);
+      });
+  }
+
+  loginfunciona(email: string, password: string) {
+    this.alerta.lanzarAlertaLoading();
     this.afauth
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
@@ -36,29 +79,28 @@ export class AuthService {
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-              if (doc.data()['verificado'] == 'true') {
-                if (user.user?.emailVerified == true) {
-                  console.log('¡Bienvenid@ ' + doc.data()['nombre'] + '!');
-                  this.alerta.lanzarAlertaExito(
-                    '¡Bienvenid@ ' + doc.data()['nombre'] + '!'
-                  );
-                  this.router.navigate(['/home']);
+              console.log(
+                'user.user?.emailVerified',
+                email,
+                user.user?.emailVerified
+              );
+              if (user.user?.emailVerified == true) {
+                if (doc.data()['verificado'] == 'true') {
                   this.st.getUser(email);
                   this.st.getImages(email);
                   this.st.getImagenes(email);
-                  // this.st.getListaHorarios(email);
+                  this.router.navigate(['/home']);
                 } else {
-                  this.alerta.lanzarAlertaError('Confirme primero su mail.');
-                  this.logout('/login');
-                  console.log('aaaa else');
+                  this.logout('/');
+                  console.log('aaaa 2');
+                  this.alerta.lanzarAlertaError(
+                    'Espere a que un admin apruebe su usuario.'
+                  );
                 }
               } else {
-                console.log('aaaa 2');
-
-                this.alerta.lanzarAlertaError(
-                  'Espere a que un admin apruebe su usuario.'
-                );
-                this.logout('/login');
+                this.alerta.lanzarAlertaError('Confirme primero su mail.');
+                this.logout('/home-espera');
+                console.log('aaaa else');
               }
               console.log(doc.data());
             });
@@ -78,12 +120,8 @@ export class AuthService {
 
   async registro(usuario: Usuario, archivos: any) {
     const actionCodeSettings = {
-      // URL you want to redirect back to. The domain (www.example.com) for this
-      // URL must be whitelisted in the Firebase Console.
-      // url: `${window.location.protocol}//${window.location.host}/`,
       url: `http://clinica-tp-utn.firebaseapp.com/`,
       apiKey: 'AIzaSyAE_9PLW4nIs-4aGriqtWiWw-GrfRMW0k4',
-      // This must be true.
       handleCodeInApp: true,
     };
     console.log(archivos);
@@ -177,11 +215,10 @@ export class AuthService {
   }
 
   logout(redireccion: string) {
+
     this.afauth
       .signOut()
       .then((user) => {
-        console.log('¡Adios!');
-        // this.alerta.lanzarAlertaExito('¡Chau!');
         this.router.navigate([redireccion]);
         this.st.usuarioObj = new Usuario('', '', '', '', '', '', '', '', []);
       })
@@ -200,7 +237,11 @@ export class AuthService {
       console.log(res);
     });
   }
-
+  cerrarSesion() {
+    this.afauth.signOut();
+    console.log('usuario', this.afauth.currentUser);
+    this.router.navigateByUrl('login');
+  }
   // constructor(
   //   private afauth: AngularFireAuth,
   //   private storage: StorageService,
@@ -299,10 +340,4 @@ export class AuthService {
   //     return mensaje;
   //   }
   // }
-
-  cerrarSesion() {
-    this.afauth.signOut();
-    console.log('usuario', this.afauth.currentUser);
-    this.router.navigateByUrl('login');
-  }
 }

@@ -4,9 +4,8 @@
       class="navbar-brand"
       href="#"
       *ngIf="usuarioLogueado | async as usuarioLogueado"
-      (click)="handleVerificarUsuario()"
     >
-      {{ usuarioLogueado.email }}
+     {{this.st.usuarioObj.nombre}} {{this.st.usuarioObj.apellido}}
     </p>
     <div style=" display: flex; flex-wrap: wrap;   align-items:center; gap: 10px">
 

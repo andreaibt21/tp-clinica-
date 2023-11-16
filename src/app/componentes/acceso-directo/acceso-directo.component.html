@@ -1,0 +1,24 @@
+
+      <div class="d-flex flex-column flex-shrink-0  container" >
+        <p >ACCESOS DIRECTOS</p>
+        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center"
+            *ngFor="let user of users; index as i">
+          <li>
+              <button (click)="logUser(users[i])" type="button" class="">
+              <!-- <img (click)="logUser(users[i])" src="{{this.storage.listaUrlParaVarios[i]}}" class="rounded" width="30" height="30" > -->
+              <img src="{{this.imagenes[i]}}" class="rounded" width="30" height="30" >
+              <div [ngSwitch]="[i]">
+                <small *ngSwitchCase="0">Pac 1</small>
+                <small *ngSwitchCase="1">Pac 2</small>
+                <small *ngSwitchCase="2">Pac 3</small>
+                <small *ngSwitchCase="3">Esp 1</small>
+                <small *ngSwitchCase="4">Esp 2</small>
+                <small *ngSwitchCase="5">Admin</small>
+              </div>
+            </button>
+
+          </li>
+        </ul>
+      </div>
+
+

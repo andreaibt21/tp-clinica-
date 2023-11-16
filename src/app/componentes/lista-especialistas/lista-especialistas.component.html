@@ -1,0 +1,19 @@
+
+<main>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <!-- <button (click)="this.test()" class="btn btn-outline-secondary" style="width: 180px;">test</button> -->
+    <div *ngFor="let esp of this.listaEsptas; index as i">
+        <div *ngFor="let espec of esp.especialidad">
+            <li *ngIf="espec == this.especialidad">
+              <button (click)="this.enviarTurnos(esp)" class="" style="width: 180px;">
+                <small>{{esp.nombre}} {{esp.apellido}}</small>
+                <br>
+                <img src="{{this.st.listaUrlParaVarios[i]}}" class="rounded" width="40" height="40" >
+                <br>
+              </button>
+              <hr>
+            </li>
+        </div>
+    </div>
+  </ul>
+</main>

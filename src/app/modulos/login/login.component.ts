@@ -36,7 +36,7 @@ export class LoginComponent {
   login() {
     const email = this.loginUsuario.value.email;
     const password = this.loginUsuario.value.password;
-    this.startTimer()
+    // this.startTimer()
     this.auth.login(email, password);
   }
 
@@ -48,41 +48,27 @@ export class LoginComponent {
   }
 
   AccesoDirectoAdmin() {
-    this.startTimer()
+    // this.startTimer()
 
     this.loginUsuario.value.email = '16-10152@usb.ve';
     this.loginUsuario.value.password = '123456';
     console.log( this.loginUsuario);
   }
   AccesoDirectoEspecialista() {
-    this.startTimer()
+    // this.startTimer()
 
     this.loginUsuario.value.email = 'jaco.9419@gmail.com';
     this.loginUsuario.value.password = '123456';
     console.log( this.loginUsuario);
   }
   AccesoDirectoPaciente1() {
-    this.startTimer()
+    // this.startTimer()
 
     this.loginUsuario.value.email = 'andreaixabella@gmail.com';
     this.loginUsuario.value.password = '123456';
     console.log( this.loginUsuario);
   }
 
-
-  startTimer() {
-    this.mostrar = true;
-    this.interval = setInterval(() => {
-      if (this.mostrar == true) {
-        this.mostrar = false;
-        this.pauseTimeLine();
-      }
-      console.log("Adsa")
-    }, 1000);
-  }
-  pauseTimeLine() {
-    clearInterval(this.interval);
-  }
 
 
 

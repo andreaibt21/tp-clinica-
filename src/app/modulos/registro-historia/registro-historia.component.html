@@ -1,0 +1,156 @@
+
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
+<br> <br> <br>
+
+  <div class="container bg-light rounded">
+    <main>
+      <div class="py-5 text-center">
+        <h2>Registrar Historia</h2>
+        <small><b>{{turno.pacNombre}} {{turno.pacApellido}} - {{turno.pacDni}} - {{turno.pacEmail}}</b></small>
+        <br><small class="btn btn-danger btn-sm animate__animated animate__flash" >Recuerde que si no graba la Historia el turno no se marcará como finalizado.</small>
+      </div>
+      <!-- poner los datos del de la historia -->
+      <div class="row g-6">
+        <form [formGroup]="form" (ngSubmit)="crearHistoria()" class="needs-validation" novalidate>
+          <div class="row g-3">            
+            <div class="col-sm-6">
+              <label for="altura" class="form-label">Altura (en cm)</label>
+              <input 
+                formControlName="altura" 
+                type="number" 
+                class="form-control" 
+                id="altura" 
+                placeholder="" 
+                value="" 
+                required>
+              <small class="errorMessage"
+                   *ngIf="getValue('altura')?.invalid && (getValue('altura').touched || getValue('altura').dirty)">
+                Introduzca una altura válida.
+              </small>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="peso" class="form-label">Peso (en Kg.)</label>
+              <input 
+                  formControlName="peso" 
+                  type="number" 
+                  class="form-control" 
+                  id="peso" 
+                  placeholder="" 
+                  value="" 
+                  required>
+              <small class="errorMessage"
+                *ngIf="getValue('peso')?.invalid && (getValue('peso').touched || getValue('peso').dirty)">
+                Introduzca un peso válido.
+            </small>
+            </div>
+
+            <div class="col-6">
+              <label for="temperatura" class="form-label">Temperatura (en °C)</label>
+              <input 
+                formControlName="temperatura" 
+                type="number" 
+                class="form-control" 
+                id="temperatura" 
+                placeholder=""
+                required>
+              <small class="errorMessage"
+                    *ngIf="getValue('temperatura')?.invalid && (getValue('temperatura').touched || getValue('temperatura').dirty)">
+                Introduzca una temperatura válida.
+              </small>
+            </div>
+            <div class="col-6">
+              <label for="presion" class="form-label">Presión (separadas por guiones)</label>
+              <input
+                formControlName="presion" 
+                type="text" 
+                class="form-control" 
+                id="presion" 
+                required>
+              <small class="errorMessage"
+                    *ngIf="getValue('presion')?.invalid && (getValue('presion').touched || getValue('presion').dirty)">
+                Introduzca una presión válida.
+              </small>
+            </div>
+            <hr>
+            <h5 class="text-center">Otros datos</h5>
+            <div class="col-4">
+              <label for="datoUnoClave" class="form-label">Dato</label>
+              <input 
+                formControlName="datoUnoClave" 
+                type="text" 
+                class="form-control" 
+                id="datoUnoClave" 
+                required>
+            </div>
+            <div class="col-8">
+            <label for="datoUnoValor" class="form-label">Descripción</label>
+            <div class="input-group">
+              <input type="text" formControlName="datoUnoValor" id="datoUnoValor" class="form-control">
+              <div (click)="setVerInputs(2)" class="input-group-append">
+                <span class="input-group-text">+</span>
+              </div>
+            </div>
+            </div>
+
+            <div  *ngIf="(this.verInputs==2 || this.verInputs==3) || this.historiaAux.datoDosClave != ''"  class="col-4">
+              <label for="datoDosClave" class="form-label">Dato</label>
+              <input 
+                formControlName="datoDosClave" 
+                type="text" 
+                class="form-control" 
+                id="datoDosClave" 
+                required>
+            </div>
+        
+            <div  *ngIf="(this.verInputs==2 || this.verInputs==3) || this.historiaAux.datoDosValor != ''" class="col-8">
+              <label for="datoDosValor" class="form-label">Descripción</label>
+              <div class="input-group">
+                <input type="text" formControlName="datoDosValor" id="datoDosValor" class="form-control">
+                <div (click)="setVerInputs(3)" class="input-group-append">
+                  <span class="input-group-text">+</span>
+                </div>
+              </div>
+              </div>
+
+            <div  *ngIf="this.verInputs==3 || this.historiaAux.datoTresClave != ''"  class="col-4">
+              <label for="datoTresClave" class="form-label">Dato</label>
+              <input 
+                formControlName="datoTresClave" 
+                type="text" 
+                class="form-control" 
+                id="datoUnoClave" 
+                required>
+            </div>
+
+            <div  *ngIf="this.verInputs==3 || this.historiaAux.datoTresValor != ''"  class="col-8">
+              <label for="datoTresValor" class="form-label">Descripción</label>
+              <input 
+                  formControlName="datoTresValor"
+                  type="text" 
+                  class="form-control" 
+                  id="datoUnoValor"
+                  required>
+            </div>
+          </div>
+          <hr class="my-4"en>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Grabar</button>
+          <br>
+          <br>
+
+          <button class="w-100 btn btn-danger btn-sm" (click)="volver()">Volver al listado</button>
+          <!-- <hr class="my-4"> -->
+          <br>
+          <br>
+        </form>
+      </div>
+    </main>
+  </div>
+
+
+

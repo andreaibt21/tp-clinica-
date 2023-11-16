@@ -13,17 +13,30 @@ import { initializeApp } from 'firebase/app';
 import { provideAuth } from '@angular/fire/auth';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
+import { CommonModule, UpperCasePipe } from '@angular/common';
 
 
 import { ErrorComponent } from './componentes/error/error.component';
 import { Error404Component } from './componentes/error404/error404.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HacerAnonSiNullPipe } from './pipes/hacerAnonSiNull.pipe';
+
 import { InicioComponent } from './modulos/inicio/inicio.component';
 import { StorageService } from './services/storage.service';
 
-
+import { HorariosEsptaPipe } from './pipes/horarios-espta.pipe';
+import { FechaHoraTurnoPipe } from './pipes/fechahora-turno.pipe';
+import { NombreEsptaTurnoPipe } from './pipes/nombreEspta-turno.pipe';
+import { GestionTurnoEsptaComponent } from './modulos/gestion-turno-espta/gestion-turno-espta.component';
+import { TablaTurnosComponent } from './componentes/tabla-turnos/tabla-turnos.component';
+import { ListaEspecialidadesComponent } from './componentes/lista-especialidades/lista-especialidades.component';
+import { ListaEspecialistasComponent } from './componentes/lista-especialistas/lista-especialistas.component';
+import { ListaTurnosComponent } from './componentes/lista-turnos/lista-turnos.component';
+import { SacarTurnoComponent } from './modulos/sacar-turno/sacar-turno.component';
+import { MiPerfilComponent } from './modulos/mi-perfil/mi-perfil.component';
+import { GestionTurnoPacComponent } from './modulos/gestion-turno-pac/gestion-turno-pac.component';
+import { RegistroHistoriaComponent } from './modulos/registro-historia/registro-historia.component';
+import { CancelarTurnoComponent } from './modulos/cancelar-turno/cancelar-turno.component';
 
 
 const firebaseConfig = {
@@ -42,9 +55,19 @@ const firebaseConfig = {
     Error404Component,
     NavbarComponent,
     InicioComponent,
-
-
-
+    GestionTurnoEsptaComponent,
+    TablaTurnosComponent,
+    ListaEspecialistasComponent,
+    ListaEspecialidadesComponent,
+    ListaTurnosComponent,
+    SacarTurnoComponent,
+    HorariosEsptaPipe,
+    FechaHoraTurnoPipe,
+    NombreEsptaTurnoPipe,
+    MiPerfilComponent,
+    GestionTurnoPacComponent,
+    RegistroHistoriaComponent,
+    CancelarTurnoComponent,
 
   ],
   imports: [
@@ -55,15 +78,19 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     FormsModule,
     ReactiveFormsModule,
-    ReactiveFormsModule,
+    CommonModule,
     AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()),
     provideStorage(()=>getStorage()),
     BrowserAnimationsModule,
+    UpperCasePipe
 
   ],
-  providers: [StorageService, HacerAnonSiNullPipe],
+  providers: [StorageService,
+
+    UpperCasePipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

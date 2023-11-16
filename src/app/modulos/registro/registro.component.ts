@@ -90,11 +90,11 @@ export class RegistroComponent {
     if(this.form.value.ginecologia)      {this.especialidades.push('Ginecología');}
     if(this.form.value.clinica)          {this.especialidades.push('Clinica');}
     if(this.form.value.especialidad)     {this.especialidades.push(this.form.value.especialidad);
-                                          this.st.addEspecialidad(this.form.value.especialidad);
-                                        }
+                                          this.st.addEspecialidad(this.form.value.especialidad);}
   }
 
   crearUsuario(){
+
     this.c.captcha().then(res=> {
       if(res){
         this.cargarEspecialidades();
@@ -108,48 +108,21 @@ export class RegistroComponent {
                                       this.form.value.obraSocial,
                                       this.especialidades);
         this.db.registro(usuario, this.archivos).then(()=>{
-          if(this.esAdmin)
+          if(!this.esAdmin)
           {
-            this.router.navigate(['/home']);
-          }
-          else
-          {
+            console.log("no es admin");
             this.router.navigate(['/home-espera']);
           }
+          this.form.reset()
+          // else
+          // {
+          //   console.log("si es admin");
+          //    this.router.navigate(['/home']);
+
+          // }
 
         });
       }
     })
   }
-
-
-
-
-
-  // public usuario = {
-  //   nombre: '',
-  //   email: '',
-  //   password: '',
-  // };
-  // public error: boolean = false;
-  // public mensaje: string = '';
-
-  // constructor(private AuthService: AuthService, private router: Router) {}
-
-  // Registrar() {
-  //   console.log(this.usuario);
-  //   const { nombre, email, password } = this.usuario;
-  //   this.AuthService.registro(nombre, email, password).then((res) => {
-  //     if (res !== '') {
-  //       this.error = true;
-  //       this.mensaje = res;
-  //      // console.log('errooooor');
-  //      // console.log(res);
-  //     } else {
-  //       this.error = false;
-  //     //  console.log('se registró', res);
-  //       this.router.navigateByUrl('home');
-  //     }
-  //   });
-  // }
 }

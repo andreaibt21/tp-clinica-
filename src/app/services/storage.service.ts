@@ -196,6 +196,230 @@ export class StorageService {
   }
 
 
+  public async addHorario(horario: Horario)
+  {
+    this.horario = {
+      nombre: horario.nombre,
+      email: horario.email,
+      clave: horario.clave,
+      diaSemana: horario.diaSemana,
+      horaHasta: horario.horaHasta,
+      horaDesde: horario.horaDesde,
+      creado: serverTimestamp(),
+      log: serverTimestamp(),
+    }
+
+    this.db.collection('horarios').add(this.horario)
+           .then(() => {console.log('Se graba el horario: ', horario.clave); })
+           .catch((error) =>  {console.log('Errror grabando el horario: ', error); });
+  }
+
+  public async addHistoria(h: Historia){
+
+    this.historia = {
+      pacNombre: h.pacNombre,
+      pacApellido: h.pacApellido,
+      pacEmail: h.pacEmail,
+      pacDni: h.pacDni,
+      altura: h.altura,
+      peso: h.peso,
+      temperatura: h.temperatura,
+      presion: h.presion,
+      datoUnoClave: h.datoUnoClave,
+      datoUnoValor: h.datoUnoValor,
+      datoDosClave: h.datoDosClave,
+      datoDosValor: h.datoDosValor,
+      datoTresClave: h.datoTresClave,
+      datoTresValor: h.datoTresValor,
+    }
+
+    this.db.collection('historias').add(this.historia)
+      .then(() => {console.log('Se graba la historia de: ', h.pacDni); })
+      .catch((error) =>  {console.log('Error grabando la historia: ', error); });
+  }
+
+  public async modificarHistoria(h: Historia)
+  {
+    firebase
+      .firestore()
+      .collection('historias')
+      .where('pacEmail','==', h.pacEmail)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            altura: h.altura,
+            peso: h.peso,
+            presion: h.presion,
+            temperatura: h.temperatura,
+            datoUnoClave: h.datoUnoClave,
+            datoUnoValor: h.datoUnoValor,
+            datoDosClave: h.datoDosClave,
+            datoDosValor: h.datoDosValor,
+            datoTresClave: h.datoTresClave,
+            datoTresValor: h.datoTresValor
+          }).then(() => {console.log("Se actualizó la historia "+h.pacEmail)})
+        });
+      })
+      .catch((error) => {
+        console.log('Error grabando: ', error);
+      });
+  }
+
+  public async addTurno(turno: Turno){
+    // console.log(turno);
+    var clave = turno.esptaEmail+'_'+turno.dia+'_'+turno.hora;
+    this.turno = {
+      esptaNombre: turno.esptaNombre,
+      esptaApellido: turno.esptaApellido,
+      esptaEmail: turno.esptaEmail,
+      esptaDni: turno.esptaDni,
+      pacNombre: turno.pacNombre,
+      pacApellido: turno.pacApellido,
+      pacEmail: turno.pacEmail,
+      pacDni: turno.pacDni,
+      especialidad: turno.especialidad,
+      diaSemana: turno.diaSemana,
+      dia: turno.dia,
+      hora: turno.hora,
+      clave: clave,
+      estado: 'nuevo',
+      resenia: '',
+      motivo_cancel: '',
+      motivo_rechazo: ''
+    }
+
+    this.db.collection('turnos').add(this.turno)
+           .then(() => {console.log('Se graba el turno: ', clave); })
+           .catch((error) =>  {console.log('Errror grabando el turno: ', error); });
+
+  }
+
+  public async addHorarioConValidacion(horario: Horario)
+  {
+    firebase
+      .firestore()
+      .collection('horarios')
+      .where('clave','==', horario.clave)
+      .get()
+      .then((querySnapshot) => {
+        if(querySnapshot.size == 0)
+        {
+          this.addHorario(horario);
+        }
+        else
+        {
+          querySnapshot.forEach((doc) => {
+            doc.ref.update({
+              horaHasta: horario.horaHasta,
+              horaDesde: horario.horaDesde,
+              log: serverTimestamp(),
+            }).then(() => {console.log("Se actualizó "+horario.clave)})
+          });
+        }
+      })
+      .catch((error) => {
+        console.log('Error grabando: ', error);
+      });
+  }
+
+  reseniarTurno(t: Turno, resenia: string){
+    firebase
+    .firestore()
+    .collection('turnos')
+    .where('clave','==', t.clave)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.update({
+          resenia: resenia
+        }).then(()=>{
+          this.alerta.lanzarAlertaExito("Turno reseñado.");
+        });
+      });
+    })
+    .catch((error) => {
+      console.log('Error cancelando: ', error);
+    });
+
+  }
+public listaturnos: any[] = [];
+
+    getTurnos(mail:string ){
+    firebase
+    .firestore()
+    .collection('turnos')
+    .where('pacEmail','==', mail)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.listaturnos.push(doc.data())
+      });
+    })
+    .catch((error) => {
+      console.log('Error get turno', error);
+    });
+    console.log("this.listaturnos",this.listaturnos)
+
+  }
+
+  cambiarEstadoTurno(t: Turno, accion: string, motivo = ''){
+    firebase
+    .firestore()
+    .collection('turnos')
+    .where('clave','==', t.clave)
+    .get()
+    .then((querySnapshot) => {
+      if(accion == 'cancelar')
+      {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            estado: 'cancelado',
+            motivo_cancel: motivo
+          }).then(()=>{
+            this.alerta.lanzarAlertaExito("Turno cancelado.");
+          });
+        });
+      }
+      else if(accion == 'rechazar')
+      {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            estado: 'rechazado',
+            motivo_rechazo: motivo
+          }).then(()=>{
+            this.alerta.lanzarAlertaExito("Turno rechazado.");
+          });
+        });
+      }
+      else if(accion == 'aceptar')
+      {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            estado: 'aceptado',
+          }).then(()=>{
+            this.alerta.lanzarAlertaExito("Turno aceptado.");
+          });
+        });
+      }
+      else if(accion == 'finalizar')
+      {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            estado: 'finalizado',
+            resenia: motivo,
+          }).then(()=>{
+            this.alerta.lanzarAlertaExito("Turno finalizado.");
+          });
+        });
+      }
+
+    })
+    .catch((error) => {
+      console.log('Error cancelando: ', error);
+    });
+
+  }
 
 
   ///VIEJAS

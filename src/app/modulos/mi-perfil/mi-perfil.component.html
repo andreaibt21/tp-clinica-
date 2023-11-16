@@ -1,0 +1,192 @@
+<br>
+<br>
+<section>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{this.st.listaUrldelMismo[0]}}"
+              class=" img-fluid" style="height: 197px;">
+            <h5 class="my-3">{{this.st.usuarioObj.nombre}} {{this.st.usuarioObj.apellido}}</h5>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button *ngIf="this.st.usuarioObj.rol == 'Paciente'" (click)="descargarHistoria()" type="button" class="btn btn-primary btn-sm">Descargar Historia</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nombre</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.st.usuarioObj.nombre}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Apellido</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.st.usuarioObj.apellido}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">DNI</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.st.usuarioObj.dni}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Mail</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.st.usuarioObj.email}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Rol</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.st.usuarioObj.rol}}</p>
+              </div>
+            </div>
+            <hr>
+            <div *ngIf="this.st.usuarioObj.rol == 'Paciente'" class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Exportar turnos:</p>
+              </div>
+              <div class="col-sm-9">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <div *ngFor="let esp of listaEspecialidades">
+                    <button (click)="descargarTurnos(esp)" type="button" class="">{{esp}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <!-- TURNOS ESPECIALISTA -->
+          <div *ngIf="this.st.usuarioObj.rol == 'Especialista'">
+            <div class="col-md-12">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+
+
+                <p class="mb-4"> HORARIOS </p>
+                <hr>
+                  <div *ngFor="let horario of this.listaItems">
+                    <div *ngIf="horario.email == this.st.usuarioObj.email">
+                      <p *ngIf="horario.horaDesde != '' || horario.horaHasta != '' "
+                          class="text-muted mb-0">
+                          {{ horario | horariosespta }}
+                          <!-- {{horario.diaSemana | uppercase}} -- Desde: {{horario.horaDesde}} - Hasta: {{horario.horaHasta}} -->
+                      </p>
+                  </div>
+                </div>
+                <hr>
+                <p class="mb-4"> AÑADA O MODIFIQUE UN HORARIO </p>
+                <!-- <hr> -->
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Día</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <p class="mb-0">Desde</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <p class="mb-0">Hasta</p>
+                  </div>
+                  <hr>
+                </div>
+
+
+                <!-- <div *ngFor="let dia of semana">  -->
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <select
+                        #dia
+                        class="form-control text">
+                          <option value="lunes">    Lunes</option>
+                          <option value="martes">   Martes</option>
+                          <option value="miércoles">Miércoles</option>
+                          <option value="jueves">   Jueves</option>
+                          <option value="viernes">  Viernes</option>
+                          <option value="sábado">   Sábado</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-3 align-middle">
+                      <input type="time"
+                            list="times"
+                            class="form-control time"
+                            [(ngModel)]="horaDesde">
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="time"
+                            list="times"
+                            class="form-control time"
+                            [(ngModel)]="horaHasta">
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                        <button class="btn btn-success" (click)="grabarDia(dia.value)">
+                          Grabar
+                        </button>
+                        <button class="btn btn-danger" (click)="reset()">
+                          Reset
+                        </button>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <small>Deje las horas vacías para eliminar los horarios de un día.</small>
+                    <!-- <hr> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<datalist id="times">>
+  <option value="08:00:00">
+  <option value="08:30:00">
+  <option value="09:00:00">
+  <option value="09:30:00">
+  <option value="10:00:00">
+  <option value="10:30:00">
+  <option value="11:00:00">
+  <option value="11:30:00">
+  <option value="12:00:00">
+  <option value="12:30:00">
+  <option value="13:00:00">
+  <option value="13:30:00">
+  <option value="14:00:00">
+  <option value="14:30:00">
+  <option value="15:00:00">
+  <option value="15:30:00">
+  <option value="16:00:00">
+  <option value="16:30:00">
+  <option value="17:00:00">
+  <option value="17:30:00">
+  <option value="18:00:00">
+</datalist>
+

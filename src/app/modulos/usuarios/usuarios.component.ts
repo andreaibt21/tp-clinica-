@@ -11,7 +11,7 @@ export class UsuariosComponent implements OnInit {
   listaItems: any;
   tipoUser: string = '';
   verificado: string = '';
-  visualizacion = 'cards';
+  visualizacion = 'lista';
 
 
   constructor(private st: StorageService) { }

@@ -21,7 +21,8 @@ export class CardsUsuariosComponent implements OnInit {
   @Input() verificado: any;
   @Input() listaTurnos: any;
   @Input() origen: any; //admin //espta
-
+  dato: any;
+  dato1: any;
   historia: any; //esto es lo que hay que enviar al componente
   verHistoria = false;
   listaHistorias: any;
@@ -30,44 +31,65 @@ export class CardsUsuariosComponent implements OnInit {
   verificarUsuario(usuario: any) {
     this.st.aprobarUser(usuario);
   }
-
+  ngOnDestroy() {
+    this.dato.next();
+    this.dato.complete();
+    this.dato1.next();
+    this.dato1.complete();
+  }
   setVerHistoria(valor: any) {
     this.verHistoria = valor;
   }
   traerHistorias(email: any) {
     console.log(email);
-    this.st.getCollection('historias', 'pacEmail').subscribe((datos) => {
-      this.listaHistorias = datos;
-      for (let h of this.listaHistorias) {
-        if (h.pacEmail == email) {
-          this.historia = h;
-          console.log(this.historia);
-          this.verHistoria = true;
+    this.dato1 = this.st
+      .getCollection('historias', 'pacEmail')
+      .subscribe((datos) => {
+        this.listaHistorias = datos;
+        for (let h of this.listaHistorias) {
+          if (h.pacEmail == email) {
+            this.historia = h;
+            console.log(this.historia);
+            this.verHistoria = true;
+            this.alerta.lanzarAlertaComun('aca va la historia');
+          }
         }
-      }
-      if (this.verHistoria == false) {
-        this.alerta.lanzarAlertaError('El paciente no tiene historia cargada');
-      }
-    });
+        if (this.verHistoria == false) {
+          this.alerta.lanzarAlertaError(
+            'El paciente no tiene historia cargada'
+          );
+        }
+      });
   }
 
   getTurnosPorUser(email: any) {
-    console.log(this.listaTurnos);
-    let ord = this.listaTurnos.sort(
-      (b: any, a: any) =>
-        +moment(a.dia + a.hora, 'YYYY-MM-DD HH:mm').format('YYYYMMDDHHmm') -
-        +moment(b.dia + b.hora, 'YYYY-MM-DD HH:mm').format('YYYYMMDDHHmm')
-    );
-    let listaTurnosPac = [];
-    for (let t of ord) {
-      if (listaTurnosPac.length < 3) {
-        if (t.pacEmail == email && t.estado == 'finalizado') {
-          listaTurnosPac.push(t);
+    this.dato = this.st
+      .getCollection('turnos', 'esptaEmail')
+      .subscribe((datos) => {
+        console.log('datos', datos);
+        this.listaTurnos = datos;
+
+        // this.st.getTurnos(email)
+        // console.log(this.st.listaturnos);
+
+        let listaTurnosPac = [];
+
+        for (let t of this.listaTurnos) {
+          if (this.listaTurnos.length != 0) {
+            if (t.pacEmail == email && t.estado == 'finalizado') {
+              listaTurnosPac.push(t);
+              console.log(t);
+            }
+          }
         }
-      }
-    }
-    console.log(listaTurnosPac[0].dia);
-    //this.alerta.lanzarMensajeTurnos(listaTurnosPac);
+        let ord = listaTurnosPac.sort(
+          (b: any, a: any) =>
+            +moment(a.dia + a.hora, 'YYYY-MM-DD HH:mm').format('YYYYMMDDHHmm') -
+            +moment(b.dia + b.hora, 'YYYY-MM-DD HH:mm').format('YYYYMMDDHHmm')
+        );
+        //console.log(listaTurnosPac[0].dia);
+        this.alerta.lanzarMensajeTurnos(ord);
+      });
   }
 
   descargarTurnos(pacEmail: any) {

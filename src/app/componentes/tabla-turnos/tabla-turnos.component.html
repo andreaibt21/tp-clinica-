@@ -1,0 +1,124 @@
+<main *ngIf="logueado | async as user" role="main">
+  <!-- <div *ngIf="logueado|async as user; else then_content"> -->
+
+  <!-- <h5>{{this.filtroEsp}}</h5> -->
+  <div *ngIf="this.campo == ''; else campo_valor">
+    <h5>Lista completa</h5>
+  </div>
+  <ng-template #campo_valor>
+    <h5>{{ this.campo }}: {{ this.valor }}</h5>
+  </ng-template>
+  <table
+    class="table table-dark table-striped"
+    style="width: 100%; align-self: center"
+  >
+    <thead>
+      <tr>
+        <th *ngIf="this.rol == 'espta'">Paciente</th>
+        <th *ngIf="this.rol == 'pac'">Doctor</th>
+        <th>DNI</th>
+        <th>Especialidad</th>
+        <th>Turno</th>
+        <th>Estado</th>
+
+        <th>Botón</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of listaItems">
+      <tr
+        *ngIf="
+          (this.rol == 'espta' && user.email == item.esptaEmail) ||
+          (this.rol == 'pac' &&
+            user.email == item.pacEmail &&
+            (item.estado == 'nuevo' ||
+              item.estado == 'aceptado' ||
+              item.estado == 'finalizado'))
+        "
+      >
+        <td *ngIf="this.rol == 'espta'">
+          <small>{{ item.pacNombre }} {{ item.pacApellido }} </small>
+        </td>
+        <td *ngIf="this.rol == 'pac'">
+          <small>{{ item.esptaNombre }} {{ item.esptaApellido }}</small>
+        </td>
+        <td *ngIf="this.rol == 'espta'">
+          <small>{{ item.pacDni }}</small>
+        </td>
+        <td *ngIf="this.rol == 'pac'">
+          <small>{{ item.esptaDni }}</small>
+        </td>
+        <td>
+          <small>{{ item.especialidad }}</small>
+        </td>
+        <td>
+          <small> {{ item | fechahoraturno }}</small>
+        </td>
+        <td>
+          <small> {{ item.estado }}</small>
+        </td>
+        <td *ngIf="item.estado == 'nuevo'">
+          <div class="btn-group" role="group">
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="accion('cancelar', item)"
+            >
+              Cancelar
+            </button>
+            <button
+              *ngIf="this.rol == 'espta'"
+              type="button"
+              class="btn btn-warning"
+              (click)="accion('rechazar', item)"
+            >
+              Rechazar
+            </button>
+            <button
+              *ngIf="this.rol == 'espta'"
+              class="btn btn-primary"
+              (click)="accion('aceptar', item)"
+            >
+              Aceptar
+            </button>
+          </div>
+        </td>
+        <td *ngIf="item.estado == 'aceptado'">
+          <button type="button" class="" (click)="accion('finalizar', item)">
+            Finalizar
+          </button>
+        </td>
+        <td *ngIf="item.estado == 'cancelado'">
+          ---
+        </td>
+        <td *ngIf="item.resenia != ''">
+          <div class="btn-group" role="group">
+            <button type="button" class="" (click)="accion('resenia', item)">
+              Reseña
+            </button>
+            <button
+              *ngIf="item.estado == 'finalizado' && this.rol == 'pac'"
+              type="button"
+              class=""
+              (click)="accion('encuesta', item)"
+            >
+              Encuesta
+            </button>
+          </div>
+        </td>
+        <td
+          *ngIf="
+            item.estado == 'finalizado' &&
+            this.rol == 'espta' &&
+            item.resenia == ''
+          "
+        >
+          <div class="btn-group" role="group">
+            <button type="button" class="" (click)="accion('reseniar', item)">
+              Reseñar
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>

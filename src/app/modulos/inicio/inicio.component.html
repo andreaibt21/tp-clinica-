@@ -17,11 +17,6 @@
       </p>
       <p class="lead">Acceda para poder gestionar sus turnos.<br /></p>
       <p class="lead">¡Bienvenido!</p>
-      <div
-        *ngIf="logueado | async as user; else then_content"
-        class="d-grid gap-2 d-md-flex justify-content-md-start"
-      ></div>
-      <ng-template #then_content>
         <button
           type="button"
           class="btn btn-primary btn-lg px-4 me-md-2"
@@ -29,7 +24,6 @@
         >
           Acceso
         </button>
-      </ng-template>
     </div>
   </div>
 </div>
