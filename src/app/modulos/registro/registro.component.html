@@ -1,8 +1,11 @@
-
-<br> <br> <br>
-<div  *ngIf="!rol; else then_content">
-
- <app-pre-registro (rol)="setRol($event)" (esAdmin)="setEsAdmin($event)"></app-pre-registro>
+<br />
+<br />
+<br />
+<div *ngIf="!rol; else then_content">
+  <app-pre-registro
+    (rol)="setRol($event)"
+    (esAdmin)="setEsAdmin($event)"
+  ></app-pre-registro>
 </div>
 <ng-template #then_content>
   <head>
@@ -14,10 +17,15 @@
   <div class="container bg-dark rounded animate__animated animate__backInRight">
     <main>
       <div class="py-5 text-center">
-        <h2>Registro {{this.rol}}</h2>
+        <h2>Registro {{ this.rol }}</h2>
       </div>
       <div class="row g-6">
-        <form [formGroup]="form" (ngSubmit)="crearUsuario()" class="needs-validation" novalidate>
+        <form
+          [formGroup]="form"
+          (ngSubmit)="crearUsuario()"
+          class="needs-validation"
+          novalidate
+        >
           <div class="row g-3">
             <div class="col">
               <label for="firstName" class="form-label">Nombre</label>
@@ -28,9 +36,15 @@
                 id="nombre"
                 placeholder=""
                 value=""
-                required>
-              <small class="errorMessage"
-                   *ngIf="getValue('nombre')?.invalid && (getValue('nombre').touched || getValue('nombre').dirty)">
+                required
+              />
+              <small
+                class="errorMessage"
+                *ngIf="
+                  getValue('nombre')?.invalid &&
+                  (getValue('nombre').touched || getValue('nombre').dirty)
+                "
+              >
                 Introduzca un nombre válido.
               </small>
             </div>
@@ -38,17 +52,23 @@
             <div class="col">
               <label for="apellido" class="form-label">Apellido</label>
               <input
-                  formControlName="apellido"
-                  type="text"
-                  class="form-control"
-                  id="apellido"
-                  placeholder=""
-                  value=""
-                  required>
-              <small class="errorMessage"
-                *ngIf="getValue('apellido')?.invalid && (getValue('apellido').touched || getValue('apellido').dirty)">
+                formControlName="apellido"
+                type="text"
+                class="form-control"
+                id="apellido"
+                placeholder=""
+                value=""
+                required
+              />
+              <small
+                class="errorMessage"
+                *ngIf="
+                  getValue('apellido')?.invalid &&
+                  (getValue('apellido').touched || getValue('apellido').dirty)
+                "
+              >
                 Introduzca un apellido válido.
-            </small>
+              </small>
             </div>
 
             <div class="col">
@@ -59,9 +79,15 @@
                 class="form-control"
                 id="edad"
                 placeholder=""
-                required>
-              <small class="errorMessage"
-                    *ngIf="getValue('edad')?.invalid && (getValue('edad').touched || getValue('edad').dirty)">
+                required
+              />
+              <small
+                class="errorMessage"
+                *ngIf="
+                  getValue('edad')?.invalid &&
+                  (getValue('edad').touched || getValue('edad').dirty)
+                "
+              >
                 Introduzca una edad válida.
               </small>
             </div>
@@ -75,9 +101,15 @@
                 type="text"
                 class="form-control"
                 id="dni"
-                required>
-              <small class="errorMessage"
-                    *ngIf="getValue('dni')?.invalid && (getValue('dni').touched || getValue('dni').dirty)">
+                required
+              />
+              <small
+                class="errorMessage"
+                *ngIf="
+                  getValue('dni')?.invalid &&
+                  (getValue('dni').touched || getValue('dni').dirty)
+                "
+              >
                 Introduzca un DNI válido.
               </small>
             </div>
@@ -87,7 +119,8 @@
                 formControlName="obraSocial"
                 type="text"
                 class="form-control"
-                id="obraSocial">
+                id="obraSocial"
+              />
             </div>
           </div>
 
@@ -99,31 +132,42 @@
                 type="email"
                 class="form-control"
                 id="email"
-                required>
-              <small class="errorMessage"
-                  *ngIf="getValue('email')?.invalid && (getValue('email').touched || getValue('email').dirty)">
-                  Introduzca un mail válido.
-            </small>
+                required
+              />
+              <small
+                class="errorMessage"
+                *ngIf="
+                  getValue('email')?.invalid &&
+                  (getValue('email').touched || getValue('email').dirty)
+                "
+              >
+                Introduzca un mail válido.
+              </small>
             </div>
 
             <div class="col">
               <label for="password" class="form-label">Contraseña</label>
               <input
-                  formControlName="password"
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  required>
-              <small class="errorMessage"
-                *ngIf="getValue('password')?.invalid && (getValue('password').touched || getValue('password').dirty)">
+                formControlName="password"
+                type="password"
+                class="form-control"
+                id="password"
+                required
+              />
+              <small
+                class="errorMessage"
+                *ngIf="
+                  getValue('password')?.invalid &&
+                  (getValue('password').touched || getValue('password').dirty)
+                "
+              >
                 Introduzca una contraseña.
               </small>
             </div>
 
-
             <div class="row g-3">
-            <!-- solo para registrar médicos -->
-            <!-- <div class="col-6" *ngIf="this.rol == 'Especialista'">
+              <!-- solo para registrar médicos -->
+              <!-- <div class="col-6" *ngIf="this.rol == 'Especialista'">
               <label for="especialidad" class="form-label">Especialidad</label>
               <select
                 formControlName="especialidad"
@@ -137,35 +181,60 @@
                   <option>Otra...</option>
               </select>
             </div> -->
-            <div class="col " *ngIf="this.rol == 'Especialista'">
-              <label for="especialidad" class="form-label">Especialidad</label>
-              <div class="form-check">
-                <input formControlName="gastroenterologia" type="checkbox" class="form-check-input" id="gastroenterologia">
-                <small class="form-check-label" for="save-info">Gastroenterología</small>
-              </div>
+              <div class="col" *ngIf="this.rol == 'Especialista'">
+                <label for="especialidad" class="form-label"
+                  >Especialidad</label
+                >
+                <div class="form-check">
+                  <input
+                    formControlName="gastroenterologia"
+                    type="checkbox"
+                    class="form-check-input"
+                    id="gastroenterologia"
+                  />
+                  <small class="form-check-label" for="save-info"
+                    >Gastroenterología</small
+                  >
+                </div>
 
-              <div class="form-check">
-                <input formControlName="ginecologia" type="checkbox" class="form-check-input" id="ginecologia">
-                <small class="form-check-label" for="save-info">Ginecología</small>
-              </div>
+                <div class="form-check">
+                  <input
+                    formControlName="ginecologia"
+                    type="checkbox"
+                    class="form-check-input"
+                    id="ginecologia"
+                  />
+                  <small class="form-check-label" for="save-info"
+                    >Ginecología</small
+                  >
+                </div>
 
-              <div class="form-check">
-                <input formControlName="clinica" type="checkbox" class="form-check-input" id="clinica">
-                <small class="form-check-label" for="save-info">Clínica</small>
-              </div>
-            </div>
-
-              <div class="col " *ngIf="this.rol == 'Especialista'">
-                <label for="especialidad" class="form-label">Otra especialidad</label>
-                <input
-                    formControlName="especialidad"
-                    type="text"
-                    class="form-control"
-                    id="especialidad">
-                <div class="invalid-feedback">
+                <div class="form-check">
+                  <input
+                    formControlName="clinica"
+                    type="checkbox"
+                    class="form-check-input"
+                    id="clinica"
+                  />
+                  <small class="form-check-label" for="save-info"
+                    >Clínica</small
+                  >
                 </div>
               </div>
-</div>
+
+              <div class="col" *ngIf="this.rol == 'Especialista'">
+                <label for="especialidad" class="form-label"
+                  >Otra especialidad</label
+                >
+                <input
+                  formControlName="especialidad"
+                  type="text"
+                  class="form-control"
+                  id="especialidad"
+                />
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
             <!-- solo para registrar pacientes -->
 
             <div class="col-12">
@@ -175,7 +244,8 @@
                 type="file"
                 class="form-control"
                 id="imagenUno"
-                (change)="cargarImagen($event)">
+                (change)="cargarImagen($event)"
+              />
             </div>
             <div class="col-12" *ngIf="this.rol == 'Paciente'">
               <label for="imagenDos" class="form-label">Imagen</label>
@@ -184,21 +254,23 @@
                 type="file"
                 class="form-control"
                 id="imagenDos"
-                (change)="cargarImagen($event)">
-              <div class="invalid-feedback">
-              </div>
+                (change)="cargarImagen($event)"
+              />
+              <div class="invalid-feedback"></div>
             </div>
-</div>
-          <hr class="my-4"en>
-          <button  type="submit">REGISTRAR</button>
+          </div>
+          <ngx-recaptcha2 #captchaElem [siteKey]="siteKey"
+          formControlName="recaptcha"
+          > </ngx-recaptcha2>
+
+          <hr class="my-4" en />
+          <button type="submit">REGISTRAR</button>
           <!-- <hr class="my-4"> -->
-          <br>
-          <br>
+          <br />
+          <br />
           <button (click)="atras()">ATRÁS</button>
         </form>
       </div>
     </main>
   </div>
 </ng-template>
-
-

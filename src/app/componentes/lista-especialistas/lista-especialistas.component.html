@@ -1,6 +1,6 @@
 
 <main>
-  <ul class="nav nav-pills flex-column mb-auto">
+  <ul class=" mb-auto">
     <!-- <button (click)="this.test()" class="btn btn-outline-secondary" style="width: 180px;">test</button> -->
     <div *ngFor="let esp of this.listaEsptas; index as i">
         <div *ngFor="let espec of esp.especialidad">
@@ -11,7 +11,7 @@
                 <img src="{{this.st.listaUrlParaVarios[i]}}" class="rounded" width="40" height="40" >
                 <br>
               </button>
-              <hr>
+         
             </li>
         </div>
     </div>

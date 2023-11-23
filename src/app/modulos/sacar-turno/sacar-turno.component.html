@@ -1,23 +1,23 @@
-<br><br><br><br>
-<main>    
+
+<main>
   <div class="container py-3">
     <div class="card-header py-3 text-center rounded bg-light">
       <h4 class="my-0 fw-normal">Sacar turno</h4>
       <small class="my-0 fw-normal">Elija un turno de la lista</small>
     </div>
     <br>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Especialidades</h4>
+    <div class="col text-center">
+      <div class="row mb-4">
+        <div class="card  rounded-3 shadow-sm">
+          <div class="card-header ">
+            <h4 class="fw-normal">Especialidades</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body container-lista">
             <app-lista-especialidades (esp)="setEsp($event)"></app-lista-especialidades>
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="row">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div *ngIf="this.esp == '' else then_content" class="card-header py-3">
             <h4 class="my-0 fw-normal">Especialistas</h4>
@@ -27,17 +27,17 @@
               <h4 class="my-0 fw-normal">{{this.esp}}</h4>
             </div>
           </ng-template>
-          <div class="card-body">
+          <div class="card-body container-lista">
               <app-lista-especialistas [especialidad]="this.esp" [accion]="'sacar'" (turnos)="setTurnos($event)"></app-lista-especialistas>
             </div>
         </div>
       </div>
-      <div class="col">
+      <div class="row">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
             <h4 class="my-0 fw-normal">Turnos</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body container-lista">
             <app-lista-turnos [accion]="'sacar'" [turnos]="this.turno"></app-lista-turnos>
           </div>
         </div>

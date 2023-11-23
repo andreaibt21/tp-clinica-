@@ -84,7 +84,8 @@ const firebaseConfig = {
     provideAuth(() => getAuth()),
     provideStorage(()=>getStorage()),
     BrowserAnimationsModule,
-    UpperCasePipe
+    UpperCasePipe,
+
 
   ],
   providers: [StorageService,

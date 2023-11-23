@@ -30,7 +30,7 @@
           (this.rol == 'espta' && user.email == item.esptaEmail) ||
           (this.rol == 'pac' &&
             user.email == item.pacEmail &&
-            (item.estado == 'nuevo' ||
+            (item.estado == 'pendiente' ||
               item.estado == 'aceptado' ||
               item.estado == 'finalizado'))
         "
@@ -56,7 +56,7 @@
         <td>
           <small> {{ item.estado }}</small>
         </td>
-        <td *ngIf="item.estado == 'nuevo'">
+        <td *ngIf="item.estado == 'pendiente'">
           <div class="btn-group" role="group">
             <button
               type="button"
@@ -87,9 +87,7 @@
             Finalizar
           </button>
         </td>
-        <td *ngIf="item.estado == 'cancelado'">
-          ---
-        </td>
+        <td *ngIf="item.estado == 'cancelado'">---</td>
         <td *ngIf="item.resenia != ''">
           <div class="btn-group" role="group">
             <button type="button" class="" (click)="accion('resenia', item)">

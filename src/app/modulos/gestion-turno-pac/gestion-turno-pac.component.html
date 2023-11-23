@@ -7,23 +7,24 @@
           <h1 class="display-4 fw-normal">Turnos</h1>
 
           <div class="d-flex justify-content-center seccion-botones">
-          <button
-            type="button"
-            (click)="this.traerTurnos()"
-            id="listacompleta"
-          >
-            Lista completa
-          </button>  <p class="fs-5 m-2">Filtrar por:</p>
+            <button
+              type="button"
+              (click)="this.traerTurnos()"
+              id="listacompleta"
+            >
+              Lista completa
+            </button>
+            <p class="fs-5 m-2">Filtrar por:</p>
             <select
               (change)="onChange(campoForm.value)"
               #campoForm
               class=""
               data-bs-toggle="dropdown"
             >
-            <option value="esptaNombre">Nombre del especialista</option>
-            <option value="esptaApellido">Apellido del especialista</option>
-            <option value="especialidad">Especialidad</option>
-             <!-- <option value="dia">Fecha</option>
+              <option value="esptaNombre">Nombre del especialista</option>
+              <option value="esptaApellido">Apellido del especialista</option>
+              <option value="especialidad">Especialidad</option>
+              <!-- <option value="dia">Fecha</option>
               <option value="diaSemana">Día de la Semana</option>
               <option value="hora">Hora</option>
               <option value="esptaDni">DNI del especialista</option>
@@ -84,7 +85,7 @@
                 data-bs-toggle="dropdown"
               >
                 <option value=""></option>
-                <option value="nuevo">Nuevo</option>
+                <option value="pendiente">Pendiente</option>
                 <option value="aceptado">Aceptado</option>
                 <option value="finalizado">Finalizado</option>
               </select>
@@ -115,24 +116,23 @@
               </select>
             </div>
           </div>
- <!-- especialidad -->
-            <div
-              *ngIf="campoAMostrar == 'especialidad'"
-              class="especialidad"
-              role="group"
-              aria-label="Basic example"
-            >
-              <div *ngFor="let esp of listaEspecialidades">
-                <button
-                  (click)="buscar('especialidad', esp)"
-                  type="button"
-                  class="esp"
-                >
-                  {{ esp }}
-                </button>
-              </div>
+          <!-- especialidad -->
+          <div
+            *ngIf="campoAMostrar == 'especialidad'"
+            class="especialidad"
+            role="group"
+            aria-label="Basic example"
+          >
+            <div *ngFor="let esp of listaEspecialidades">
+              <button
+                (click)="buscar('especialidad', esp)"
+                type="button"
+                class="esp"
+              >
+                {{ esp }}
+              </button>
             </div>
-
+          </div>
 
           <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
             <app-tabla-turnos

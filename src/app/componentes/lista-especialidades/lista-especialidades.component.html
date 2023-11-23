@@ -1,10 +1,11 @@
 
 <main>
   <div class="b-example-divider"></div>
-    <ul class="nav nav-pills flex-column   mb-auto">
+    <!-- <ul class="nav nav-pills flex-col   mb-auto"> -->
+      <ul class="  mb-auto">
       <!-- <button (click)="this.enviarEspecialidad('Oftalmología')"class="btn btn-outline-secondary" style="width: 180px;">test</button> -->
       <div *ngFor="let esp of this.listaItems">
-        <li>
+        <li >
           <button (click)="this.enviarEspecialidad(esp.nombre)" class="" style="width: 180px;">
             <div [ngSwitch]="esp.nombre">
               <div *ngSwitchCase="'Clinica'" class="bi bi-clipboard2-pulse">
@@ -35,7 +36,7 @@
               </div>
             </div>
         </button>
-        <hr>
+
         </li>
       </div>
     </ul>

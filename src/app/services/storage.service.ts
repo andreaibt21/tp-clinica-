@@ -4,7 +4,13 @@ import firebase from 'firebase/compat/app';
 import { serverTimestamp } from 'firebase/firestore';
 import { AlertService } from './alert.service';
 import { Usuario } from 'src/app/clases/usuario';
-import { ref, Storage, uploadBytes, listAll, getDownloadURL} from '@angular/fire/storage';
+import {
+  ref,
+  Storage,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
+} from '@angular/fire/storage';
 import { AuthService } from './auth.service';
 import { Horario } from 'src/app/clases/horario';
 import { Turno } from 'src/app/clases/turno';
@@ -29,9 +35,8 @@ export class StorageService {
   constructor(
     private db: AngularFirestore,
     private alerta: AlertService,
-    public st: Storage
-  ) // public auth: AuthService
-  {}
+    public st: Storage // public auth: AuthService
+  ) {}
 
   public async addUsuario(usuario: Usuario, archivos: any) {
     var verificado;
@@ -66,7 +71,6 @@ export class StorageService {
         this.alerta.lanzarAlertaError(error);
       });
   }
-
 
   public async addEspecialidad(especialidad: string) {
     firebase
@@ -195,9 +199,7 @@ export class StorageService {
       });
   }
 
-
-  public async addHorario(horario: Horario)
-  {
+  public async addHorario(horario: Horario) {
     this.horario = {
       nombre: horario.nombre,
       email: horario.email,
@@ -207,15 +209,20 @@ export class StorageService {
       horaDesde: horario.horaDesde,
       creado: serverTimestamp(),
       log: serverTimestamp(),
-    }
+    };
 
-    this.db.collection('horarios').add(this.horario)
-           .then(() => {console.log('Se graba el horario: ', horario.clave); })
-           .catch((error) =>  {console.log('Errror grabando el horario: ', error); });
+    this.db
+      .collection('horarios')
+      .add(this.horario)
+      .then(() => {
+        console.log('Se graba el horario: ', horario.clave);
+      })
+      .catch((error) => {
+        console.log('Errror grabando el horario: ', error);
+      });
   }
 
-  public async addHistoria(h: Historia){
-
+  public async addHistoria(h: Historia) {
     this.historia = {
       pacNombre: h.pacNombre,
       pacApellido: h.pacApellido,
@@ -231,34 +238,43 @@ export class StorageService {
       datoDosValor: h.datoDosValor,
       datoTresClave: h.datoTresClave,
       datoTresValor: h.datoTresValor,
-    }
+    };
 
-    this.db.collection('historias').add(this.historia)
-      .then(() => {console.log('Se graba la historia de: ', h.pacDni); })
-      .catch((error) =>  {console.log('Error grabando la historia: ', error); });
+    this.db
+      .collection('historias')
+      .add(this.historia)
+      .then(() => {
+        console.log('Se graba la historia de: ', h.pacDni);
+      })
+      .catch((error) => {
+        console.log('Error grabando la historia: ', error);
+      });
   }
 
-  public async modificarHistoria(h: Historia)
-  {
+  public async modificarHistoria(h: Historia) {
     firebase
       .firestore()
       .collection('historias')
-      .where('pacEmail','==', h.pacEmail)
+      .where('pacEmail', '==', h.pacEmail)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            altura: h.altura,
-            peso: h.peso,
-            presion: h.presion,
-            temperatura: h.temperatura,
-            datoUnoClave: h.datoUnoClave,
-            datoUnoValor: h.datoUnoValor,
-            datoDosClave: h.datoDosClave,
-            datoDosValor: h.datoDosValor,
-            datoTresClave: h.datoTresClave,
-            datoTresValor: h.datoTresValor
-          }).then(() => {console.log("Se actualizó la historia "+h.pacEmail)})
+          doc.ref
+            .update({
+              altura: h.altura,
+              peso: h.peso,
+              presion: h.presion,
+              temperatura: h.temperatura,
+              datoUnoClave: h.datoUnoClave,
+              datoUnoValor: h.datoUnoValor,
+              datoDosClave: h.datoDosClave,
+              datoDosValor: h.datoDosValor,
+              datoTresClave: h.datoTresClave,
+              datoTresValor: h.datoTresValor,
+            })
+            .then(() => {
+              console.log('Se actualizó la historia ' + h.pacEmail);
+            });
         });
       })
       .catch((error) => {
@@ -266,9 +282,9 @@ export class StorageService {
       });
   }
 
-  public async addTurno(turno: Turno){
+  public async addTurno(turno: Turno) {
     // console.log(turno);
-    var clave = turno.esptaEmail+'_'+turno.dia+'_'+turno.hora;
+    var clave = turno.esptaEmail + '_' + turno.dia + '_' + turno.hora;
     this.turno = {
       esptaNombre: turno.esptaNombre,
       esptaApellido: turno.esptaApellido,
@@ -283,38 +299,43 @@ export class StorageService {
       dia: turno.dia,
       hora: turno.hora,
       clave: clave,
-      estado: 'nuevo',
+      estado: 'pendiente',
       resenia: '',
       motivo_cancel: '',
-      motivo_rechazo: ''
-    }
+      motivo_rechazo: '',
+    };
 
-    this.db.collection('turnos').add(this.turno)
-           .then(() => {console.log('Se graba el turno: ', clave); })
-           .catch((error) =>  {console.log('Errror grabando el turno: ', error); });
-
+    this.db
+      .collection('turnos')
+      .add(this.turno)
+      .then(() => {
+        console.log('Se graba el turno: ', clave);
+      })
+      .catch((error) => {
+        console.log('Errror grabando el turno: ', error);
+      });
   }
 
-  public async addHorarioConValidacion(horario: Horario)
-  {
+  public async addHorarioConValidacion(horario: Horario) {
     firebase
       .firestore()
       .collection('horarios')
-      .where('clave','==', horario.clave)
+      .where('clave', '==', horario.clave)
       .get()
       .then((querySnapshot) => {
-        if(querySnapshot.size == 0)
-        {
+        if (querySnapshot.size == 0) {
           this.addHorario(horario);
-        }
-        else
-        {
+        } else {
           querySnapshot.forEach((doc) => {
-            doc.ref.update({
-              horaHasta: horario.horaHasta,
-              horaDesde: horario.horaDesde,
-              log: serverTimestamp(),
-            }).then(() => {console.log("Se actualizó "+horario.clave)})
+            doc.ref
+              .update({
+                horaHasta: horario.horaHasta,
+                horaDesde: horario.horaDesde,
+                log: serverTimestamp(),
+              })
+              .then(() => {
+                console.log('Se actualizó ' + horario.clave);
+              });
           });
         }
       })
@@ -323,104 +344,102 @@ export class StorageService {
       });
   }
 
-  reseniarTurno(t: Turno, resenia: string){
+  reseniarTurno(t: Turno, resenia: string) {
     firebase
-    .firestore()
-    .collection('turnos')
-    .where('clave','==', t.clave)
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        doc.ref.update({
-          resenia: resenia
-        }).then(()=>{
-          this.alerta.lanzarAlertaExito("Turno reseñado.");
+      .firestore()
+      .collection('turnos')
+      .where('clave', '==', t.clave)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref
+            .update({
+              resenia: resenia,
+            })
+            .then(() => {
+              this.alerta.lanzarAlertaExito('Turno reseñado.');
+            });
         });
+      })
+      .catch((error) => {
+        console.log('Error cancelando: ', error);
       });
-    })
-    .catch((error) => {
-      console.log('Error cancelando: ', error);
-    });
-
   }
-public listaturnos: any[] = [];
+  public listaturnos: any[] = [];
 
-    getTurnos(mail:string ){
+  getTurnos(mail: string) {
     firebase
-    .firestore()
-    .collection('turnos')
-    .where('pacEmail','==', mail)
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        this.listaturnos.push(doc.data())
+      .firestore()
+      .collection('turnos')
+      .where('pacEmail', '==', mail)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.listaturnos.push(doc.data());
+        });
+      })
+      .catch((error) => {
+        console.log('Error get turno', error);
       });
-    })
-    .catch((error) => {
-      console.log('Error get turno', error);
-    });
-    console.log("this.listaturnos",this.listaturnos)
-
+    console.log('this.listaturnos', this.listaturnos);
   }
 
-  cambiarEstadoTurno(t: Turno, accion: string, motivo = ''){
+  cambiarEstadoTurno(t: Turno, accion: string, motivo = '') {
     firebase
-    .firestore()
-    .collection('turnos')
-    .where('clave','==', t.clave)
-    .get()
-    .then((querySnapshot) => {
-      if(accion == 'cancelar')
-      {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            estado: 'cancelado',
-            motivo_cancel: motivo
-          }).then(()=>{
-            this.alerta.lanzarAlertaExito("Turno cancelado.");
+      .firestore()
+      .collection('turnos')
+      .where('clave', '==', t.clave)
+      .get()
+      .then((querySnapshot) => {
+        if (accion == 'cancelar') {
+          querySnapshot.forEach((doc) => {
+            doc.ref
+              .update({
+                estado: 'cancelado',
+                motivo_cancel: motivo,
+              })
+              .then(() => {
+                this.alerta.lanzarAlertaExito('Turno cancelado.');
+              });
           });
-        });
-      }
-      else if(accion == 'rechazar')
-      {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            estado: 'rechazado',
-            motivo_rechazo: motivo
-          }).then(()=>{
-            this.alerta.lanzarAlertaExito("Turno rechazado.");
+        } else if (accion == 'rechazar') {
+          querySnapshot.forEach((doc) => {
+            doc.ref
+              .update({
+                estado: 'rechazado',
+                motivo_rechazo: motivo,
+              })
+              .then(() => {
+                this.alerta.lanzarAlertaExito('Turno rechazado.');
+              });
           });
-        });
-      }
-      else if(accion == 'aceptar')
-      {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            estado: 'aceptado',
-          }).then(()=>{
-            this.alerta.lanzarAlertaExito("Turno aceptado.");
+        } else if (accion == 'aceptar') {
+          querySnapshot.forEach((doc) => {
+            doc.ref
+              .update({
+                estado: 'aceptado',
+              })
+              .then(() => {
+                this.alerta.lanzarAlertaExito('Turno aceptado.');
+              });
           });
-        });
-      }
-      else if(accion == 'finalizar')
-      {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            estado: 'finalizado',
-            resenia: motivo,
-          }).then(()=>{
-            this.alerta.lanzarAlertaExito("Turno finalizado.");
+        } else if (accion == 'finalizar') {
+          querySnapshot.forEach((doc) => {
+            doc.ref
+              .update({
+                estado: 'finalizado',
+                resenia: motivo,
+              })
+              .then(() => {
+                this.alerta.lanzarAlertaExito('Turno finalizado.');
+              });
           });
-        });
-      }
-
-    })
-    .catch((error) => {
-      console.log('Error cancelando: ', error);
-    });
-
+        }
+      })
+      .catch((error) => {
+        console.log('Error cancelando: ', error);
+      });
   }
-
 
   ///VIEJAS
   actualizarDato(mail: string, campo: any, nuevoDato: any) {

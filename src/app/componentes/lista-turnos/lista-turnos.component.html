@@ -1,6 +1,6 @@
 
 <main>
-  <ul class="nav nav-pills flex-column mb-auto">
+  <ul class=" mb-auto">
     <!-- <button (click)="this.test()" class="btn btn-outline-secondary" style="width: 180px;">test</button> -->
     <div *ngFor="let t of this.turnos; index as i">
         <li *ngIf="accion =='cancelar'">
@@ -10,13 +10,13 @@
             <small>{{t | nombreEsptaturno }}</small><br>
             <small>{{t | fechahoraturno }}</small>
           </button>
-          <hr>
+      
         </li>
         <li *ngIf="accion =='sacar'">
           <button  class="" (click)="abrirModal(t)">
             <small>{{t | fechahoraturno }}</small>
           </button>
-          <hr>
+
         </li>
     </div>
   </ul>

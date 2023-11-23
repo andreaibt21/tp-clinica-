@@ -91,7 +91,7 @@ export class ListaEspecialistasComponent implements OnInit {
   crearListaTurnosLibres(espta: any) {
     this.listaTurnosActivosEsp = [];
     for (let t of this.listaTurnos) {
-      if (t.esptaEmail == espta.email && t.estado == 'nuevo') {
+      if (t.esptaEmail == espta.email && t.estado == 'pendiente') {
         this.listaTurnosActivosEsp.push(t);
       }
     }
@@ -171,7 +171,7 @@ export class ListaEspecialistasComponent implements OnInit {
           this.listaTurnosLibresEsp[i].dia == l.dia &&
           this.listaTurnosLibresEsp[i].hora == l.hora &&
           this.listaTurnosLibresEsp[i].esptaEmail == l.esptaEmail &&
-          (l.estado == 'nuevo' || l.estado == 'aceptado')
+          (l.estado == 'pendiente' || l.estado == 'aceptado')
         ) {
           this.listaTurnosLibresEsp.splice(i, 1);
         }
