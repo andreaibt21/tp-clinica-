@@ -65,7 +65,3 @@ Muestra los usuarios registrados en el sistema, se puede filtrar y descargar
 <img src="pantallas/16.png">
 
 
-
-## Mis turnos -especialista
-Para buscar entre los turnos propios.
-<img src="pantallas/17.png">
