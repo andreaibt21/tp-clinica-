@@ -34,9 +34,9 @@
                 <button (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-secondary">Historial <i class="bi bi-info-circle"></i></button>
                 <button (click)="this.descargarTurnos(item.email)"   type="button" class="w-100 btn btn-sm btn-danger">Turnos <i class="bi bi-file-pdf"></i></button>
               </div>
-              <!-- <button *ngIf="tipoUser=='Paciente'" (click)="this.getTurnosPorUser(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver últimos turnos</button>
+              <button *ngIf="tipoUser=='Paciente'" (click)="this.getTurnosPorUser(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver últimos turnos</button>
               <br>
-              <button *ngIf="tipoUser=='Paciente'" (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver historial</button> -->
+              <button *ngIf="tipoUser=='Paciente'" (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver historial</button>
               <button *ngIf="item.verificado =='false'" type="button" class="w-100 btn btn-sm btn-success"   (click)="verificarUsuario(item.email)">Aprobar <i class="bi bi-shield-check"></i></button>
             </div>
           </div>
@@ -49,6 +49,6 @@
 <!-- </div> -->
 
 <div *ngIf="this.verHistoria == true">
-  <!-- <app-historia-clinica [historia]="historia" [origen]="'admin'"></app-historia-clinica> -->
+  <app-historia-clinica [historia]="historia" [origen]="'admin'"></app-historia-clinica>
   <button type="button" class="btn btn-danger btn-sm" (click)="this.setVerHistoria(false)">Volver</button>
 </div>

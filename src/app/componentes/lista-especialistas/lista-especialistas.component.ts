@@ -35,6 +35,7 @@ export class ListaEspecialistasComponent implements OnInit {
 
   //MOSTRAR
   listaEsptas: any[] = [];
+  listaEsptas2: any[] = [];
   listaMailsEspecialistas: any[] = [];
 
   constructor(public auth: AuthService, public st: StorageService) {}
@@ -43,6 +44,7 @@ export class ListaEspecialistasComponent implements OnInit {
     this.traerListaUsuarios();
     this.traerListaHorarios();
     this.traerListaTurnos();
+
   }
 
   traerListaHorarios() {
@@ -56,8 +58,7 @@ export class ListaEspecialistasComponent implements OnInit {
       this.listaTurnos = datos;
     });
   }
-
-  traerListaUsuarios() {
+  traerListaUsuarios2() {
     this.st.getCollection('usuarios', 'nombre').subscribe((datos) => {
       this.listaItems = datos;
       for (let i = 0; i < this.listaItems.length; i++) {
@@ -72,8 +73,25 @@ export class ListaEspecialistasComponent implements OnInit {
     });
   }
 
+
+  traerListaUsuarios() {
+    this.st.getCollection('usuarios', 'nombre').subscribe((datos) => {
+      this.listaItems = datos;
+      for (let i = 0; i < this.listaItems.length; i++) {
+        if (this.listaItems[i].rol == 'Especialista') {
+          this.listaEsptas.push(this.listaItems[i]);
+        }
+      }
+      for (let i = 0; i < this.listaEsptas.length; i++) {
+        this.listaMailsEspecialistas.push(this.listaEsptas[i].email);
+      }
+      this.st.getImagenes(this.listaMailsEspecialistas);
+    });
+
+  }
+
   enviarTurnos(espta: any) {
-    console.log(this.listaEsptas);
+    console.log("this.listaEsptas",this.listaEsptas);
     switch (this.accion) {
       case 'cancelar':
         this.crearListaTurnosLibres(espta);

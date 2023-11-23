@@ -6,7 +6,8 @@
       <!-- <button (click)="this.enviarEspecialidad('Oftalmología')"class="btn btn-outline-secondary" style="width: 180px;">test</button> -->
       <div *ngFor="let esp of this.listaItems">
         <li >
-          <button (click)="this.enviarEspecialidad(esp.nombre)" class="" style="width: 180px;">
+          <!-- <button (click)="this.enviarEspecialidad(esp.nombre)" class="" style="width: 180px;"> -->
+            <button (click)="this.enviarEspecialidad(esp.nombre)" class="" style="width: 180px;">
             <div [ngSwitch]="esp.nombre">
               <div *ngSwitchCase="'Clinica'" class="bi bi-clipboard2-pulse">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#74AEFC" class="bi bi-clipboard2-pulse" viewBox="0 0 16 16">

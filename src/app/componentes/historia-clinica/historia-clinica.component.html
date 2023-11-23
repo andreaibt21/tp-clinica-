@@ -1,0 +1,80 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
+<div class="card mb-4 animate__animated animate__backInRight"> 
+  <div class="card-body">
+    <h3 class="mb-4"> Historia clínica </h3>
+    <div *ngIf="this.origen=='admin'">
+      <h5 class="mb-4"> {{historia.pacNombre}} {{historia.pacApellido}} </h5>
+      <h6 class="mb-4"> {{historia.pacDni}}</h6>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Peso</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{(historia.peso)}} Kg.</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Altura</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{historia.altura}} cm.</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Temperatura</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{historia.temperatura}} ºC</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Presión</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{historia.presion}}</p>
+      </div>
+    </div>
+    <hr>
+    <h5>Otros datos:</h5>
+    <br>
+    <div *ngIf="historia.datoUnoClave != ''" class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">{{historia.datoUnoClave}}</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{historia.datoUnoValor}}</p>
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="historia.datoDosClave != ''" class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">{{historia.datoDosClave}}</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{historia.datoDosValor}}</p>
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="historia.datoTresClave != ''" class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">{{historia.datoTresClave}}</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{historia.datoTresValor}}</p>
+      </div>
+      <hr>
+    </div>
+  </div>
+</div>

@@ -42,24 +42,19 @@ export class CardsUsuariosComponent implements OnInit {
   }
   traerHistorias(email: any) {
     console.log(email);
-    this.dato1 = this.st
-      .getCollection('historias', 'pacEmail')
-      .subscribe((datos) => {
-        this.listaHistorias = datos;
-        for (let h of this.listaHistorias) {
-          if (h.pacEmail == email) {
-            this.historia = h;
-            console.log(this.historia);
-            this.verHistoria = true;
-            this.alerta.lanzarAlertaComun('aca va la historia');
-          }
+    this.st.getCollection('historias', 'pacEmail').subscribe((datos) => {
+      this.listaHistorias = datos;
+      for (let h of this.listaHistorias) {
+        if (h.pacEmail == email) {
+          this.historia = h;
+          console.log(this.historia);
+          this.verHistoria = true;
         }
-        if (this.verHistoria == false) {
-          this.alerta.lanzarAlertaError(
-            'El paciente no tiene historia cargada'
-          );
-        }
-      });
+      }
+      if (this.verHistoria == false) {
+        this.alerta.lanzarAlertaError('El paciente no tiene historia cargada');
+      }
+    });
   }
 
   getTurnosPorUser(email: any) {

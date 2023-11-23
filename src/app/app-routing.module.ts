@@ -8,6 +8,8 @@ import { GestionTurnoPacComponent } from './modulos/gestion-turno-pac/gestion-tu
 import { SacarTurnoComponent } from './modulos/sacar-turno/sacar-turno.component';
 import { MiPerfilComponent } from './modulos/mi-perfil/mi-perfil.component';
 import { CancelarTurnoComponent } from './modulos/cancelar-turno/cancelar-turno.component';
+import { UsuariosComponent } from './modulos/usuarios/usuarios.component';
+import { PacientesComponent } from './modulos/pacientes/pacientes.component';
 
 const routes: Routes = [
   // {
@@ -48,11 +50,12 @@ const routes: Routes = [
       import('./modulos/home/home.module').then((mod) => mod.HomeModule),
   },
   {
+    path: 'pacientes',
+  component: PacientesComponent
+},
+  {
     path: 'usuarios',
-    loadChildren: () =>
-      import('./modulos/usuarios/usuarios.module').then(
-        (mod) => mod.UsuariosModule
-      ),
+    component: UsuariosComponent,
   },
   {
     path: 'gestion-turno-espta',
