@@ -1,10 +1,12 @@
 
 <main>
   <ul class=" mb-auto">
+      <!-- <button (click)="this.consola()"></button> -->
+
     <!-- <button (click)="this.test()" class="btn btn-outline-secondary" style="width: 180px;">test</button> -->
     <div *ngFor="let t of this.turnos; index as i">
         <li *ngIf="accion =='cancelar'">
-          <button  class="rectangulo" (click)="abrirModal(t)">
+          <button   (click)="abrirModal(t)">
             <small>{{t.pacNombre}} {{t.pacApellido}}</small><br>
             <small>{{t.pacEmail}}</small><br>
             <small>{{t | nombreEsptaturno }}</small><br>
@@ -13,7 +15,7 @@
 
         </li>
         <li *ngIf="accion =='sacar'">
-          <button  class="" (click)="abrirModal(t)">
+          <button class="rectangulo"  (click)="abrirModal(t)">
             <small>{{t | fechahoraturno }}</small>
           </button>
 

@@ -45,6 +45,9 @@ import { UsuariosComponent } from './modulos/usuarios/usuarios.component';
 import { CardsUsuariosComponent } from './componentes/cards-usuarios/cards-usuarios.component';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { PacientesComponent } from './modulos/pacientes/pacientes.component';
+import { ListaTurnosSacarComponent } from './componentes/lista-turnos-sacar/lista-turnos-sacar.component';
+import { ListaEspecialidadesSacarComponent } from './componentes/lista-especialidades-sacar/lista-especialidades-sacar.component';
+import { ListaEspecialistasSacarComponent } from './componentes/lista-especialistas-sacar/lista-especialistas-sacar.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAE_9PLW4nIs-4aGriqtWiWw-GrfRMW0k4',
@@ -80,7 +83,10 @@ const firebaseConfig = {
     UsuariosComponent,
     CardsUsuariosComponent,
     SpinnerComponent,
-    PacientesComponent
+    PacientesComponent,
+    ListaTurnosSacarComponent,
+    ListaEspecialidadesSacarComponent,
+    ListaEspecialistasSacarComponent
 
   ],
   imports: [

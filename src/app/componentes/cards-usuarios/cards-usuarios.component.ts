@@ -32,10 +32,10 @@ export class CardsUsuariosComponent implements OnInit {
     this.st.aprobarUser(usuario);
   }
   ngOnDestroy() {
-    this.dato.next();
-    this.dato.complete();
-    this.dato1.next();
-    this.dato1.complete();
+    //this.dato.next();
+   // this.dato.complete();
+   // this.dato1.next();
+  //  this.dato1.complete();
   }
   setVerHistoria(valor: any) {
     this.verHistoria = valor;

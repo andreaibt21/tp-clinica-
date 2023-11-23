@@ -11,6 +11,7 @@ export class SacarTurnoComponent implements OnInit {
 
   esp = '';
   espta = '';
+  especialista="";
   turno: Turno[] = [];
   constructor() { }
 
@@ -26,6 +27,10 @@ export class SacarTurnoComponent implements OnInit {
   setTurnos(turnos: any)
   {
     this.turno = turnos;
+  }
+  setEspecialista(especialista: any)
+  {
+    this.especialista = especialista;
   }
 
 }

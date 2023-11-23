@@ -11,8 +11,9 @@ li{
   margin: 10px;
 
 }
-.rectangulo {
-  border-radius: 5px !important;
-  width: 180px!important;
-  height: 100px
+.circulo{
+width:150px;
+height: 150px;
+border-radius:100%;
+
 }

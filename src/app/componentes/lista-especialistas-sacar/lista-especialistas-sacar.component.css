@@ -1,0 +1,17 @@
+ul {
+  display: flex;
+  width: 90%;
+  list-style-type: none;
+  background-color: white;
+  overflow-x: scroll;
+  margin: auto;
+}
+
+li {
+  margin: 10px;
+}
+.rectangulo {
+  border-radius: 5px !important;
+  width: 180px!important;
+  height: 100px
+}

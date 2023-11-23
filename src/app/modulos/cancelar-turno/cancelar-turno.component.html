@@ -1,4 +1,4 @@
-<br><br>
+
 <main>
   <div class="container py-3">
     <div class="card-header py-3 text-center rounded ">
@@ -6,8 +6,8 @@
       <h3 class="my-0 ">Elija un turno de la lista para cancelar</h3>
     </div>
     <br>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-      <div class="col">
+    <div class="col text-center">
+      <div class="row">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
             <h4 class="my-0 fw-normal">Especialidades</h4>
@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="row">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div *ngIf="this.esp == '' else then_content" class="card-header py-3">
             <h4 class="my-0 fw-normal">Especialistas</h4>
@@ -34,7 +34,7 @@
             </div>
         </div>
       </div>
-      <div class="col">
+      <div class="row">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
             <h4 class="my-0 fw-normal">Turnos</h4>

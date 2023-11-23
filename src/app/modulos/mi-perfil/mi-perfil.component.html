@@ -8,6 +8,8 @@
           <div class="card-body text-center">
             <img src="{{this.st.listaUrldelMismo[0]}}"
               class=" img-fluid" style="height: 197px;">
+              <img *ngIf="this.st.listaUrldelMismo[1]" src="{{this.st.listaUrldelMismo[1]}}"
+              class=" img-fluid" style="height: 197px;">
             <h5 class="my-3">{{this.st.usuarioObj.nombre}} {{this.st.usuarioObj.apellido}}</h5>
             <div class="btn-group" role="group" aria-label="Basic example">
               <button *ngIf="this.st.usuarioObj.rol == 'Paciente' && this.verHistoria==false" (click)="setVerHistoria(true)" type="button" class="btn btn-primary btn-sm">Ver Historia</button>

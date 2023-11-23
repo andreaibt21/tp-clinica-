@@ -7,6 +7,12 @@ import { Turno } from 'src/app/clases/turno';
 export class FechaHoraTurnoPipe implements PipeTransform {
 
   transform(value: Turno, args?: any): any {
+
+      let retorno = value.dia.split("2023-")
+    let fecha =retorno[1]
+
+
+
     var diaSemana = '';
     switch(value.diaSemana){
       case 'lunes':
@@ -33,7 +39,7 @@ export class FechaHoraTurnoPipe implements PipeTransform {
       default:
         diaSemana = '?';
     }
-    return `${diaSemana} - ${value.dia} -  ${value.hora}`;
+    return ` ${fecha} -  ${value.hora}`;
   }
 
 }

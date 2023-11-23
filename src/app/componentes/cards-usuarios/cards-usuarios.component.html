@@ -11,9 +11,9 @@
       <!-- <div  *ngIf="item.rol == this.tipoUser && item.verificado == verificado"> -->
         <!-- <div class="col">   -->
    <div class="container">
-    <div class="row">
+    <div class="row ">
 
-    <div class="col-md-3 mx-auto m-5" *ngFor="let item of listaItems" class="animate__animated animate__backInUp">
+    <div class="col-md-3 mx-auto m-5 " *ngFor="let item of listaItems" class="animate__animated animate__backInUp">
       <!-- <div  *ngIf="item.rol == this.tipoUser && item.verificado == verificado" > -->
             <div class="card-block m-3 card mb- rounded-3 shadow-sm col-sm-6 " *ngIf="item.rol == this.tipoUser && item.verificado == verificado" >
             <div class="card-header py-3">
@@ -30,14 +30,24 @@
               </div> -->
               <br>
               <div class="w-100 btn-group" *ngIf="tipoUser=='Paciente'" role="group" aria-label="Basic example">
-                <button (click)="this.getTurnosPorUser(item.email)"   type="button" class="w-100 btn btn-sm btn-info">Turnos <i class="bi bi-eye"></i> </button>
-                <button (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-secondary">Historial <i class="bi bi-info-circle"></i></button>
-                <button (click)="this.descargarTurnos(item.email)"   type="button" class="w-100 btn btn-sm btn-danger">Turnos <i class="bi bi-file-pdf"></i></button>
+                <button (click)="this.getTurnosPorUser(item.email)"   type="button" class="w-100 btn btn-sm btn-info">Ver Turnos <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                </svg> </button>
+                <button (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-success">Ver Historial <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                </svg></button>
+                <button (click)="this.descargarTurnos(item.email)"   type="button" class="w-100 btn btn-sm btn-danger">Descargar Turnos <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
+                </svg></button>
               </div>
-              <button *ngIf="tipoUser=='Paciente'" (click)="this.getTurnosPorUser(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver últimos turnos</button>
+              <!-- <button *ngIf="tipoUser=='Paciente'" (click)="this.getTurnosPorUser(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver últimos turnos</button> -->
               <br>
-              <button *ngIf="tipoUser=='Paciente'" (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver historial</button>
-              <button *ngIf="item.verificado =='false'" type="button" class="w-100 btn btn-sm btn-success"   (click)="verificarUsuario(item.email)">Aprobar <i class="bi bi-shield-check"></i></button>
+              <!-- <button *ngIf="tipoUser=='Paciente'" (click)="this.traerHistorias(item.email)"   type="button" class="w-100 btn btn-sm btn-outline-secondary">Ver historial</button> -->
+              <button *ngIf="item.verificado =='false'" type="button" class="w-100 btn btn-sm btn-success"   (click)="verificarUsuario(item.email)">Aprobar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </svg></button>
             </div>
           </div>
         </div>

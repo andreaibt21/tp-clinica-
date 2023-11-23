@@ -9,16 +9,13 @@
     <div class="col text-center">
       <div class="row">
         <div class="card mb-4 rounded-3 shadow-sm">
-          <div *ngIf="this.esp == '' else then_content" class="card-header py-3">
+          <div class="card-header py-3">
             <h4 class="my-0 fw-normal">Especialistas</h4>
           </div>
-          <ng-template #then_content>
-            <div class="card-header py-3">
-              <h4 class="my-0 fw-normal">{{this.esp}}</h4>
-            </div>
-          </ng-template>
+
           <div class="card-body container-lista">
-              <app-lista-especialistas [especialidad]="this.esp" [accion]="'sacar'" (turnos)="setTurnos($event)"></app-lista-especialistas>
+            <!-- <app-lista-especialistas [especialidad]="this.esp" [accion]="'sacar'" (turnos)="setTurnos($event)"></app-lista-especialistas> -->
+            <app-lista-especialistas-sacar [especialidad]="this.esp" [accion]="'sacar'" (especialista)="setEspecialista($event)" ></app-lista-especialistas-sacar>
             </div>
         </div>
       </div>
@@ -29,7 +26,7 @@
             <h4 class="fw-normal">Especialidades</h4>
           </div>
           <div class="card-body container-lista">
-            <app-lista-especialidades (esp)="setEsp($event)"></app-lista-especialidades>
+            <app-lista-especialidades-sacar  [especialista]="this.especialista" (esp)="setEsp($event)" (turnos)="setTurnos($event)"></app-lista-especialidades-sacar>
           </div>
         </div>
       </div>
@@ -41,7 +38,7 @@
             <h4 class="my-0 fw-normal">Turnos</h4>
           </div>
           <div class="card-body container-lista">
-            <app-lista-turnos [accion]="'sacar'" [turnos]="this.turno"></app-lista-turnos>
+            <app-lista-turnos-sacar [accion]="'sacar'"  [esp]="this.esp" [turnos]="this.turno"></app-lista-turnos-sacar>
           </div>
         </div>
       </div>

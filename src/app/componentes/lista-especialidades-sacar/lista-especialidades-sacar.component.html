@@ -2,26 +2,28 @@
 <main>
   <div class="b-example-divider"></div>
     <!-- <ul class="nav nav-pills flex-col   mb-auto"> -->
+      <div *ngIf="this.especialista.especialidad" >
       <ul class="  mb-auto">
       <!-- <button (click)="this.enviarEspecialidad('Oftalmología')"class="btn btn-outline-secondary" style="width: 180px;">test</button> -->
-      <div *ngFor="let esp of this.listaItems">
+      <!-- <button (click)="this.consola()"></button> -->
+        <div  *ngFor="let esp of this.especialista.especialidad">
         <li >
           <!-- <button (click)="this.enviarEspecialidad(esp.nombre)" class="" style="width: 180px;"> -->
-            <button (click)="this.enviarEspecialidad(esp.nombre)" class="rectangulo" style="width: 180px;">
-            <div [ngSwitch]="esp.nombre">
+            <button (click)="this.enviarTurnos(this.especialista)" class="circulo" style="width: 180px;">
+            <div [ngSwitch]="esp">
               <div *ngSwitchCase="'Clinica'" class="bi bi-clipboard2-pulse">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#74AEFC" class="bi bi-clipboard2-pulse" viewBox="0 0 16 16">
                   <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
                   <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
                   <path d="M9.979 5.356a.5.5 0 0 0-.968.04L7.92 10.49l-.94-3.135a.5.5 0 0 0-.926-.08L4.69 10H4.5a.5.5 0 0 0 0 1H5a.5.5 0 0 0 .447-.276l.936-1.873 1.138 3.793a.5.5 0 0 0 .968-.04L9.58 7.51l.94 3.135A.5.5 0 0 0 11 11h.5a.5.5 0 0 0 0-1h-.128L9.979 5.356Z"/>
                 </svg>
-                <br>{{esp.nombre}}
+                <br>{{esp}}
               </div>
               <div *ngSwitchCase="'Ginecología'" class="bi bi-person-heart">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#74AEFC" class="bi bi-person-heart" viewBox="0 0 16 16">
                   <path d="M9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4Zm13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276Z"/>
                 </svg>
-                <br>{{esp.nombre}}
+                <br>{{esp}}
               </div>
               <div *ngSwitchCase="'Gastroenterología'" class="bi bi-bandaid-fill">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#74AEFC" class="bi bi-bandaid-fill" viewBox="0 0 16 16">
@@ -33,7 +35,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#74AEFC" class="bi bi-eyedropper" viewBox="0 0 16 16">
                   <path d="M13.354.646a1.207 1.207 0 0 0-1.708 0L8.5 3.793l-.646-.647a.5.5 0 1 0-.708.708L8.293 5l-7.147 7.146A.5.5 0 0 0 1 12.5v1.793l-.854.853a.5.5 0 1 0 .708.707L1.707 15H3.5a.5.5 0 0 0 .354-.146L11 7.707l1.146 1.147a.5.5 0 0 0 .708-.708l-.647-.646 3.147-3.146a1.207 1.207 0 0 0 0-1.708l-2-2zM2 12.707l7-7L10.293 7l-7 7H2v-1.293z"/>
                 </svg>
-                <br>{{esp.nombre}}
+                <br>{{esp}}
               </div>
             </div>
         </button>
@@ -41,4 +43,5 @@
         </li>
       </div>
     </ul>
+  </div>
 </main>
