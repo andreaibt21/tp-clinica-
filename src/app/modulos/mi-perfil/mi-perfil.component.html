@@ -15,6 +15,7 @@
               <button *ngIf="this.st.usuarioObj.rol == 'Paciente' && this.verHistoria==false" (click)="setVerHistoria(true)" type="button" class="btn btn-primary btn-sm">Ver Historia</button>
               <button *ngIf="this.st.usuarioObj.rol == 'Paciente' && this.verHistoria==true" (click)="setVerHistoria(false)" type="button" class="btn btn-danger btn-sm">Ocultar Historia</button>
               <button *ngIf="this.st.usuarioObj.rol == 'Paciente'" (click)="descargarHistoria()" type="button" class="btn btn-success btn-sm">Descargar Historia</button>
+              <button *ngIf="this.st.usuarioObj.rol == 'Paciente'" (click)="descargarHistoriasDeTurnos(this.st.usuarioObj.email)" type="button" class="btn btn-success btn-sm">Descargar Historia de turnos</button>
             </div>
           </div>
         </div>
@@ -69,12 +70,12 @@
             <hr>
             <div *ngIf="this.st.usuarioObj.rol == 'Paciente'" class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Exportar turnos:</p>
+                <p class="mb-0">SELECCIONE LA ESPECIALIDAD PARA EXPORTAR SUS TURNOS :</p>
               </div>
               <div class="col-sm-9">
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <div *ngFor="let esp of listaEspecialidades">
-                    <button (click)="descargarTurnos(esp)" type="button" class="">{{esp}}</button>
+                    <button (click)="descargarTurnos(esp )" type="button" class="">{{esp}}</button>
                   </div>
                 </div>
               </div>

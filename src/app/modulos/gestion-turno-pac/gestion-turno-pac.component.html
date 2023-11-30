@@ -28,27 +28,25 @@
               <option value="diaSemana">Día de la Semana</option>
               <option value="hora">Hora</option>
               <option value="esptaDni">DNI del especialista</option>
-
               <option value="estado">Estado</option>
+              <option value="historia">Datos Historia</option>
             </select>
-            <div
-              *ngIf="
-                campoAMostrar == 'esptaDni' ||
+            <div *ngIf="campoAMostrar == 'esptaDni' ||
                 campoAMostrar == 'esptaApellido' ||
                 campoAMostrar == 'esptaNombre'
               "
             >
               <div class="d-flex justify-content-center">
-                <div class="input-group-prepend">
+                <!-- <div class="input-group-prepend">
                   <button
                     type="button"
                     (click)="this.buscar(campoAMostrar, valor.value.trim())"
                   >
                     Buscar
                   </button>
-                </div>
+                </div> -->
                 <input
-                  (keyup.enter)="this.buscar(campoAMostrar, valor.value.trim())"
+                  (keyup)="this.buscar(campoAMostrar, valor.value.trim())"
                   #valor
                   type="text"
                   class="inputdato"
@@ -58,7 +56,29 @@
                 />
               </div>
             </div>
-
+            <div *ngIf="campoAMostrar == 'historia'">
+                      <div class="d-flex justify-content-center">
+                        <input
+                          (keyup)="this.buscarhistoria(campoAMostrar, valor.value.trim())"
+                          #valor
+                          type="text"
+                          class="inputdato"
+                          placeholder="inserte un dato"
+                          aria-label=""
+                          aria-describedby="basic-addon1"
+                        />
+                        <!-- <div class="input-group-prepend">
+                          <button
+                            type="button"
+                            (click)="
+                              this.buscarhistoria(campoAMostrar, valor.value.trim())
+                            "
+                          >
+                            Buscar
+                          </button>
+                        </div> -->
+                      </div>
+                    </div>
             <!-- dia semana -->
             <div *ngIf="campoAMostrar == 'diaSemana'">
               <select
@@ -74,6 +94,7 @@
                 <option value="jueves">Jueves</option>
                 <option value="viernes">Viernes</option>
                 <option value="sábado">Sábado</option>
+
               </select>
             </div>
             <!-- estado -->
@@ -133,6 +154,7 @@
               </button>
             </div>
           </div>
+
 
           <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
             <app-tabla-turnos

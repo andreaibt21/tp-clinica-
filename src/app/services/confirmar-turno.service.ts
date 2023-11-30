@@ -20,6 +20,8 @@ async confirmarTurno(turno: Turno){
   var especialidad = turno.especialidad;
   var dia = turno.dia;
   var hora = turno.hora;
+  
+  console.log("turno", turno)
 
   await Swal.fire({
     title: '<strong>¿Confirmar turno?</strong>',

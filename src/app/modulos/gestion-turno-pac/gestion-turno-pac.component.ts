@@ -87,7 +87,15 @@ export class GestionTurnoPacComponent implements OnInit {
       }
     });
   }
+  buscarhistoria(
+    campo: any,
+    valor: any //se envía a la tabla listaTurnos
+  ) {
 
+    this.listaTurnosOk = this.busq.buscarHI(campo, valor, this.listaTurnos);
+    this.campo = campo;
+    this.valor = valor;
+  }
   traerHoras(email: any) {
     this.listaHoras = [];
     this.st.getCollection('turnos', 'dia').subscribe((datos) => {
@@ -111,8 +119,16 @@ export class GestionTurnoPacComponent implements OnInit {
 
   traerTurnos() {
     this.st.getCollection('turnos', 'dia').subscribe((datos) => {
-      this.listaTurnos = datos;
-      this.listaTurnosOk = datos;
+      const newDatos = datos.map((element: any) => {
+        //  console.log('element', element);
+          return {
+            ...element,
+            historia: element.historia ? JSON.parse(element.historia) : "No tiene historia",
+          };
+        });
+        console.log('turnios', newDatos);
+        this.listaTurnos = newDatos;
+        this.listaTurnosOk = newDatos;
     });
   }
 

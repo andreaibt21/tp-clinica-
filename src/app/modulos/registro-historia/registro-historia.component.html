@@ -16,17 +16,17 @@
       </div>
       <!-- poner los datos del de la historia -->
       <div class="row g-6">
-        <form [formGroup]="form" (ngSubmit)="crearHistoria()" class="needs-validation" novalidate>
-          <div class="row g-3">            
+        <form [formGroup]="form" (ngSubmit)="crearHistoria(turno)" class="needs-validation" novalidate>
+          <div class="row g-3">
             <div class="col-sm-6">
               <label for="altura" class="form-label">Altura (en cm)</label>
-              <input 
-                formControlName="altura" 
-                type="number" 
-                class="form-control" 
-                id="altura" 
-                placeholder="" 
-                value="" 
+              <input
+                formControlName="altura"
+                type="number"
+                class="form-control"
+                id="altura"
+                placeholder=""
+                value=""
                 required>
               <small class="errorMessage"
                    *ngIf="getValue('altura')?.invalid && (getValue('altura').touched || getValue('altura').dirty)">
@@ -36,13 +36,13 @@
 
             <div class="col-sm-6">
               <label for="peso" class="form-label">Peso (en Kg.)</label>
-              <input 
-                  formControlName="peso" 
-                  type="number" 
-                  class="form-control" 
-                  id="peso" 
-                  placeholder="" 
-                  value="" 
+              <input
+                  formControlName="peso"
+                  type="number"
+                  class="form-control"
+                  id="peso"
+                  placeholder=""
+                  value=""
                   required>
               <small class="errorMessage"
                 *ngIf="getValue('peso')?.invalid && (getValue('peso').touched || getValue('peso').dirty)">
@@ -52,11 +52,11 @@
 
             <div class="col-6">
               <label for="temperatura" class="form-label">Temperatura (en °C)</label>
-              <input 
-                formControlName="temperatura" 
-                type="number" 
-                class="form-control" 
-                id="temperatura" 
+              <input
+                formControlName="temperatura"
+                type="number"
+                class="form-control"
+                id="temperatura"
                 placeholder=""
                 required>
               <small class="errorMessage"
@@ -67,10 +67,10 @@
             <div class="col-6">
               <label for="presion" class="form-label">Presión (separadas por guiones)</label>
               <input
-                formControlName="presion" 
-                type="text" 
-                class="form-control" 
-                id="presion" 
+                formControlName="presion"
+                type="text"
+                class="form-control"
+                id="presion"
                 required>
               <small class="errorMessage"
                     *ngIf="getValue('presion')?.invalid && (getValue('presion').touched || getValue('presion').dirty)">
@@ -81,11 +81,11 @@
             <h5 class="text-center">Otros datos</h5>
             <div class="col-4">
               <label for="datoUnoClave" class="form-label">Dato</label>
-              <input 
-                formControlName="datoUnoClave" 
-                type="text" 
-                class="form-control" 
-                id="datoUnoClave" 
+              <input
+                formControlName="datoUnoClave"
+                type="text"
+                class="form-control"
+                id="datoUnoClave"
                 required>
             </div>
             <div class="col-8">
@@ -100,14 +100,14 @@
 
             <div  *ngIf="(this.verInputs==2 || this.verInputs==3) || this.historiaAux.datoDosClave != ''"  class="col-4">
               <label for="datoDosClave" class="form-label">Dato</label>
-              <input 
-                formControlName="datoDosClave" 
-                type="text" 
-                class="form-control" 
-                id="datoDosClave" 
+              <input
+                formControlName="datoDosClave"
+                type="text"
+                class="form-control"
+                id="datoDosClave"
                 required>
             </div>
-        
+
             <div  *ngIf="(this.verInputs==2 || this.verInputs==3) || this.historiaAux.datoDosValor != ''" class="col-8">
               <label for="datoDosValor" class="form-label">Descripción</label>
               <div class="input-group">
@@ -120,20 +120,20 @@
 
             <div  *ngIf="this.verInputs==3 || this.historiaAux.datoTresClave != ''"  class="col-4">
               <label for="datoTresClave" class="form-label">Dato</label>
-              <input 
-                formControlName="datoTresClave" 
-                type="text" 
-                class="form-control" 
-                id="datoUnoClave" 
+              <input
+                formControlName="datoTresClave"
+                type="text"
+                class="form-control"
+                id="datoUnoClave"
                 required>
             </div>
 
             <div  *ngIf="this.verInputs==3 || this.historiaAux.datoTresValor != ''"  class="col-8">
               <label for="datoTresValor" class="form-label">Descripción</label>
-              <input 
+              <input
                   formControlName="datoTresValor"
-                  type="text" 
-                  class="form-control" 
+                  type="text"
+                  class="form-control"
                   id="datoUnoValor"
                   required>
             </div>

@@ -1,0 +1,70 @@
+<br>
+<br>
+<br>
+<body>
+  <div class="container p-4 mb-4 bg-light rounded-3">
+    <header>
+      <br>
+      <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">Informes</h1>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button (click)="turnosPorDia()" type="button" class="btn btn-secondary btn-sm">Logs de ingresos</button>
+            <!-- <button (click)="setInforme(1)" type="button" class="btn btn-secondary btn-sm">Logs de ingresos</button>    -->
+            <button (click)="setInforme(2)" type="button" class="btn btn-secondary btn-sm">Nº turnos<br>(por especialidad)</button>
+            <button (click)="setInforme(3)" type="button" class="btn btn-secondary btn-sm">Nº de turnos<br>(por día)</button>
+            <button (click)="setInforme(4)" type="button" class="btn btn-secondary btn-sm">Turnos <br>(por Especialista y lapso de tiempo)</button>
+            <button (click)="setInforme(5)" type="button" class="btn btn-secondary btn-sm">Turnos finalizados <br>(por lapso de tiempo)</button>
+        </div>
+        <br>
+        <br>
+        <!-- LOS BUSCADORES POR FECHA -->
+        <div *ngIf="this.informe==4 || this.informe==5">
+        <!-- <div> -->
+          <div class="d-flex justify-content-center">
+            <div class="input-group input-group-sm mb-3" style="width: 50%;">
+              <input #desde type="text" placeholder="Fecha desde"  class="form-control small"  aria-describedby="basic-addon1">
+              <input #hasta type="text" placeholder="Fecha hasta"  class="form-control small"  aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary" type="button" (click)="BuscarPorLapso(desde.value, hasta.value, this.informe)">Buscar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div [ngSwitch]="this.informe">
+          <div *ngSwitchCase="1">
+<h1>ffff</h1>
+
+          </div>
+
+          <div *ngSwitchCase="2">
+            <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+
+          </div>
+
+          <div *ngSwitchCase="3">
+
+            <h1>3</h1>
+
+          </div>
+
+          <div *ngSwitchCase="4">
+
+            <h1>4</h1>
+
+          </div>
+
+          <div *ngSwitchCase="5">
+            <h1></h1>
+
+
+          </div>
+
+
+       </div>
+      </div>
+    </header>
+  </div>
+
+
+</body>

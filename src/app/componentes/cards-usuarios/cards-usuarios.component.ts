@@ -58,6 +58,7 @@ export class CardsUsuariosComponent implements OnInit {
   }
 
   getTurnosPorUser(email: any) {
+    let ord;
     this.dato = this.st
       .getCollection('turnos', 'esptaEmail')
       .subscribe((datos) => {
@@ -77,21 +78,52 @@ export class CardsUsuariosComponent implements OnInit {
             }
           }
         }
-        let ord = listaTurnosPac.sort(
+        ord = listaTurnosPac.sort(
           (b: any, a: any) =>
             +moment(a.dia + a.hora, 'YYYY-MM-DD HH:mm').format('YYYYMMDDHHmm') -
             +moment(b.dia + b.hora, 'YYYY-MM-DD HH:mm').format('YYYYMMDDHHmm')
         );
         //console.log(listaTurnosPac[0].dia);
-        this.alerta.lanzarMensajeTurnos(ord);
+        if(ord != null){
+          this.alerta.lanzarMensajeTurnos(ord);
+        }
       });
   }
 
   descargarTurnos(pacEmail: any) {
-    if (this.listaTurnos.length > 0) {
-      this.pdf.exportTurnos(this.listaTurnos, '', pacEmail);
+    this.dato = this.st
+    .getCollection('turnos', 'esptaEmail')
+    .subscribe((datos) => {
+      console.log('datos', datos);
+      this.listaTurnos = datos;
+
+      // this.st.getTurnos(email)
+      // console.log(this.st.listaturnos);
+
+      let listaTurnosPac = [];
+
+      for (let t of this.listaTurnos) {
+        if (this.listaTurnos.length != 0) {
+          if (t.pacEmail == pacEmail && t.estado == 'finalizado') {
+            listaTurnosPac.push(t);
+            console.log(t);
+          }
+        }
+      }
+      let ord = listaTurnosPac.sort(
+        (b: any, a: any) =>
+          +moment(a.dia + a.hora, 'YYYY-MM-DD HH:mm').format('YYYYMMDDHHmm') -
+          +moment(b.dia + b.hora, 'YYYY-MM-DD HH:mm').format('YYYYMMDDHHmm')
+      );
+
+    if (ord.length > 0) {
+      this.pdf.exportTurnos(ord, '', pacEmail);
     } else {
       this.alerta.lanzarAlertaError('No tiene turnos todavía');
     }
+    })
+
+
+
   }
 }

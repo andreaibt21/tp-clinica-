@@ -14,14 +14,15 @@ export class Turno{
     clave: any;
     resenia: any;
     estado: any;
+    historia?: any;
 
-    constructor(esptaNombre: any, 
+    constructor(esptaNombre: any,
                 esptaApellido: any,
                 esptaEmail: any,
                 esptaDni: any,
                 especialidad: any,
-                diaSemana: any, 
-                dia: any, 
+                diaSemana: any,
+                dia: any,
                 hora: any){
         this.esptaNombre = esptaNombre;
         this.esptaApellido = esptaApellido;
@@ -31,6 +32,7 @@ export class Turno{
         this.diaSemana = diaSemana,
         this.dia = dia;
         this.hora = hora;
+
     }
 
     turnoMasPaciente(turno: Turno, pacNombre: any, pacApellido: any, pacEmail: any, pacDni: any){

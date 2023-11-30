@@ -31,27 +31,26 @@
             <option value="diaSemana">Día de la Semana</option>
             <option value="hora">Hora</option>
             <option value="estado">Estado</option>
+            <option value="historia">Datos Historia</option>
             </select>
             <br />
             <br />
-            <div
-              *ngIf="
-                campoAMostrar == 'pacDni' ||
+            <div  *ngIf=" campoAMostrar == 'pacDni' ||
                 campoAMostrar == 'pacApellido' ||
                 campoAMostrar == 'pacNombre'
               "
             >
               <div class="d-flex justify-content-center">
-                <div class="input-group-prepend">
+                <!-- <div class="input-group-prepend">
                   <button
                     type="button"
                     (click)="this.buscar(campoAMostrar, valor.value.trim())"
                   >
                     Buscar
                   </button>
-                </div>
+                </div> -->
                 <input
-                  (keyup.enter)="this.buscar(campoAMostrar, valor.value.trim())"
+                  (keyup)="this.buscar(campoAMostrar, valor.value.trim())"
                   #valor
                   type="text"
                   class="inputdato"
@@ -61,6 +60,30 @@
                 />
               </div>
             </div>
+
+            <div *ngIf=" campoAMostrar == 'historia' "
+          >
+            <div class="d-flex justify-content-center">
+
+              <input
+                (keyup)="this.buscarhistoria(campoAMostrar, valor.value.trim())"
+                #valor
+                type="text"
+                class="inputdato"
+                placeholder=""
+                aria-label=""
+                aria-describedby="basic-addon1"
+              />
+              <!-- <div class="input-group-prepend">
+                <button
+                  type="button"
+                  (click)="this.buscarhistoria(campoAMostrar, valor.value.trim())"
+                >
+                  Buscar
+                </button>
+              </div> -->
+            </div>
+          </div>
             <!-- dia semana -->
             <div *ngIf="campoAMostrar == 'diaSemana'">
               <select

@@ -46,7 +46,7 @@ export class ListaEspecialistasSacarComponent implements OnInit {
     this.traerListaUsuarios();
     this.traerListaHorarios();
     this.traerListaTurnos();
-    this.traerListaUsuarios2();
+    //this.traerListaUsuarios2();
   }
 
 
@@ -96,12 +96,14 @@ export class ListaEspecialistasSacarComponent implements OnInit {
       this.listaItems = datos;
       for (let i = 0; i < this.listaItems.length; i++) {
         if (this.listaItems[i].rol == 'Especialista') {
-          this.listaEsptas.push(this.listaItems[i]);
+          this.listaEsptas2.push(this.listaItems[i]);
         }
       }
-      for (let i = 0; i < this.listaEsptas.length; i++) {
-        this.listaMailsEspecialistas.push(this.listaEsptas[i].email);
+      console.log("this.listaEsptas2",this.listaEsptas2)
+      for (let i = 0; i < this.listaEsptas2.length; i++) {
+        this.listaMailsEspecialistas.push(this.listaEsptas2[i].email);
       }
+      console.log("this.listaMailsEspecialistas",this.listaMailsEspecialistas)
       this.st.getImagenes(this.listaMailsEspecialistas);
     });
 

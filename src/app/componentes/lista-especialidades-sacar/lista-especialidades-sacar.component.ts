@@ -8,6 +8,7 @@ import { AnimateTimings } from '@angular/animations';
 import * as moment from 'moment';
 import 'moment/locale/es';
 import { Turno } from 'src/app/clases/turno';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-lista-especialidades-sacar',
@@ -17,8 +18,8 @@ import { Turno } from 'src/app/clases/turno';
 export class ListaEspecialidadesSacarComponent implements OnInit {
   listaItems: any;
   @Output() esp = new EventEmitter<string>();
-  @Input() especialista: any;
   @Output() turnos = new EventEmitter<any>();
+  @Input() especialista: any;
   @Input() accion: any;
   // @Input() especialidad: any;
   @Output() especialidad = new EventEmitter<any>();
@@ -41,7 +42,7 @@ export class ListaEspecialidadesSacarComponent implements OnInit {
   listaEsptas2: any[] = [];
   listaMailsEspecialistas: any[] = [];
 
-  constructor(public auth: AuthService, public st: StorageService) {}
+  constructor(public auth: AuthService, public st: StorageService,   private _location: Location,) {}
 
   ngOnInit() {
     this.traerListaActualizada();
@@ -169,10 +170,12 @@ export class ListaEspecialidadesSacarComponent implements OnInit {
       .getCollection('horarios', 'diaSemana')
       .subscribe((datos) => (this.listaHorarios = datos));
   }
-  enviarTurnos(espta: any) {
+  enviarTurnos(espta: any, esp:any) {
     console.log('accion', this.accion);
-    console.log('this.listaTurnos', this.listaTurnos);
-    console.log('this.listaHorariosEsp', this.listaHorariosEsp);
+    // console.log('this.listaTurnos', this.listaTurnos);
+    // console.log('this.listaHorariosEsp', this.listaHorariosEsp);
+    // console.log( "this.esp",this.esp)
+    console.log( "espta",espta)
     // if (this.accion == 'cancelar') {
     //   this.crearListaTurnosLibres(espta);
     //   this.turnos.emit(this.listaTurnosActivosEsp);
@@ -193,7 +196,7 @@ export class ListaEspecialidadesSacarComponent implements OnInit {
                 espta.apellido,
                 espta.email,
                 espta.dni,
-                this.especialidad,
+                esp,
                 d.diaSemana,
                 d.fecha,
                 hora

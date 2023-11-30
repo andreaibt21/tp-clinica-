@@ -9,6 +9,8 @@ ul {
 
 li {
   margin: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .rectangulo {
   border-radius: 5px !important;

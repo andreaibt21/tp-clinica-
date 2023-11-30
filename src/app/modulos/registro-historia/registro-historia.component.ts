@@ -50,7 +50,7 @@ export class RegistroHistoriaComponent implements OnInit {
 
   ngOnInit() {
     this.verInputs = 0;
-    this.getTieneHistoria();
+   // this.getTieneHistoria();
     // console.log(this.historiaAux);
     console.log(this.historiaAux.datoDosClave);
     console.log(this.historiaAux);
@@ -118,7 +118,8 @@ export class RegistroHistoriaComponent implements OnInit {
     }
   }
 
-  crearHistoria() {
+  crearHistoria(turno: any) {
+    console.log("turno", turno)
     console.log(this.form.value.altura);
     this.generarOtrosDatos();
     var historia = new Historia(
@@ -137,17 +138,20 @@ export class RegistroHistoriaComponent implements OnInit {
       this.form.value.datoTresClave,
       this.form.value.datoTresValor
     );
-
+    console.log(historia);
+    this.st.modificarTurno(historia,turno.clave)
+    .then(()=> {this.finT.finalizarTurno(this.turno); this.historia.emit(false);})
     // console.log(historia);
-    this.tieneHistoria
-      ? this.st.modificarHistoria(historia).then(() => {
-          this.finT.finalizarTurno(this.turno);
-          this.historia.emit(false);
-        })
-      : this.st.addHistoria(historia).then(() => {
-          this.finT.finalizarTurno(this.turno);
-          this.historia.emit(false);
-        });
+    // this.tieneHistoria
+    //   ? this.st.modificarHistoria(historia).then(() => {
+    //       this.finT.finalizarTurno(this.turno);
+    //       this.historia.emit(false);
+    //     })
+    //   :
+      //  this.st.addHistoria(historia).then(() => {
+      //     this.finT.finalizarTurno(this.turno);
+      //     this.historia.emit(false);
+      //   });
   }
 
   volver() {

@@ -9,7 +9,7 @@
         <div  *ngFor="let esp of this.especialista.especialidad">
         <li >
           <!-- <button (click)="this.enviarEspecialidad(esp.nombre)" class="" style="width: 180px;"> -->
-            <button (click)="this.enviarTurnos(this.especialista)" class="circulo" style="width: 180px;">
+            <button (click)="this.enviarTurnos(this.especialista,esp)" class="circulo" style="width: 180px;">
             <div [ngSwitch]="esp">
               <div *ngSwitchCase="'Clinica'" class="bi bi-clipboard2-pulse">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#74AEFC" class="bi bi-clipboard2-pulse" viewBox="0 0 16 16">

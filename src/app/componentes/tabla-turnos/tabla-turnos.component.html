@@ -20,6 +20,7 @@
         <th>Especialidad</th>
         <th>Turno</th>
         <th>Estado</th>
+        <th>Historia</th>
 
         <th>Botón</th>
       </tr>
@@ -32,7 +33,8 @@
             user.email == item.pacEmail &&
             (item.estado == 'pendiente' ||
               item.estado == 'aceptado' ||
-              item.estado == 'finalizado'))
+              item.estado == 'finalizado'||
+              item.estado == 'cancelado'))
         "
       >
         <td *ngIf="this.rol == 'espta'">
@@ -56,6 +58,24 @@
         <td>
           <small> {{ item.estado }}</small>
         </td>
+        <td *ngIf="item.historia !== 'No tiene historia' && item.historia; else then_content" id="historia">
+
+
+
+            <tr><td>altura : {{item.historia.altura}}</td></tr>
+            <tr><td>peso : {{item.historia.peso}}</td></tr>
+            <tr><td>temperatura : {{item.historia.temperatura}}</td></tr>
+            <tr><td>presion : {{item.historia.presion}}</td></tr>
+            <tr *ngIf="item.historia.datoUnoClave !== ''"><td> {{item.historia.datoUnoClave}}: {{item.historia.datoUnoValor}}</td></tr>
+            <tr *ngIf="item.historia.datoDosClave !== ''"><td>{{item.historia.datoDosClave}} : {{item.historia.datoDosValor}}</td></tr>
+            <tr *ngIf="item.historia.datoTresClave !== ''"><td> {{item.historia.datoTresClave}} : {{item.historia.datoTresValor}}</td></tr>
+
+
+        </td>
+        <ng-template #then_content>
+
+          <td><small>No tiene historia</small></td>
+        </ng-template>
         <td *ngIf="item.estado == 'pendiente'">
           <div class="btn-group" role="group">
             <button
@@ -119,4 +139,7 @@
       </tr>
     </tbody>
   </table>
+
+
+
 </main>

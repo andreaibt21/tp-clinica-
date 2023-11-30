@@ -281,6 +281,27 @@ export class StorageService {
         console.log('Error grabando: ', error);
       });
   }
+  public async modificarTurno(historia: Historia, clave: string) {
+    firebase
+      .firestore()
+      .collection('turnos')
+      .where('clave', '==', clave)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref
+            .update({
+              historia: JSON.stringify(historia)
+            })
+            .then(() => {
+              console.log('Se guardó bien la historia en el turno' + historia.pacEmail);
+            });
+        });
+      })
+      .catch((error) => {
+        console.log('Error grabando: ', error);
+      });
+  }
 
   public async addTurno(turno: Turno) {
     // console.log(turno);

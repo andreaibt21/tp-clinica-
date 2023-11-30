@@ -26,10 +26,12 @@ export class SacarTurnoComponent implements OnInit {
 
   setTurnos(turnos: any)
   {
+    console.log("setturnos",turnos)
     this.turno = turnos;
   }
   setEspecialista(especialista: any)
   {
+    console.log("setEspecialista",especialista)
     this.especialista = especialista;
   }
 

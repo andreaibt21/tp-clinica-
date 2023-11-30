@@ -21,6 +21,8 @@ export class MiPerfilComponent implements OnInit {
   verHistoria = false;
   listaEspecialidades: any[] = [];
   listaTurnos: any;
+  listaTurnosHistorias: any;
+
 
   constructor(
     public st: StorageService,
@@ -39,6 +41,7 @@ export class MiPerfilComponent implements OnInit {
     });
     this.traerListaActualizada();
     this.traerTurnos();
+
   }
 
   elegirDia(dia: any) {
@@ -83,6 +86,29 @@ export class MiPerfilComponent implements OnInit {
       .getCollection('horarios', 'diaSemana')
       .subscribe((datos) => (this.listaItems = datos));
   }
+  descargarHistoriasDeTurnos(email: any, ) {
+    let listaAux: any[] =[];
+    const newDatos = this.listaTurnos.map((element: any) => {
+      //  console.log('element', element);
+        return {
+          ...element,
+          historia: element.historia ? JSON.parse(element.historia) : "No tiene historia",
+        };
+      });
+      console.log('turnios', newDatos);
+      this.listaTurnos = newDatos;
+      this.listaTurnos.forEach((turno: any) => {
+        if(turno.pacEmail === email){
+          listaAux.push(turno)
+          console.log("turnoi",turno)
+        }
+        console.log("listaAux",listaAux)
+        this.listaTurnosHistorias = listaAux;
+        this.pdf.exportHistoriadeTurnos(this.listaTurnosHistorias,this.st.usuarioObj.nombre + ' ' + this.st.usuarioObj.apellido );
+
+    });
+
+  }
 
   traerHistorias(email: any) {
     this.st.getCollection('historias', 'pacEmail').subscribe((datos) => {
@@ -118,7 +144,7 @@ export class MiPerfilComponent implements OnInit {
 
   descargarTurnos(especialidad: string) {
     if (this.listaTurnos.length > 0) {
-      this.pdf.exportTurnos(this.listaTurnos, especialidad);
+      this.pdf.exportTurnos(this.listaTurnos, especialidad,"",this.st.usuarioObj.nombre + ' ' + this.st.usuarioObj.apellido );
     } else {
       this.alerta.lanzarAlertaError('No tiene turnos.');
     }

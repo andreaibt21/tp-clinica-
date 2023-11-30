@@ -35,6 +35,8 @@ export class TablaTurnosComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.listaItems);
+
+
   }
 
   accion(tipo: string, turno: any) {

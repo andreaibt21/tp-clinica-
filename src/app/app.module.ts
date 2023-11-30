@@ -48,7 +48,9 @@ import { PacientesComponent } from './modulos/pacientes/pacientes.component';
 import { ListaTurnosSacarComponent } from './componentes/lista-turnos-sacar/lista-turnos-sacar.component';
 import { ListaEspecialidadesSacarComponent } from './componentes/lista-especialidades-sacar/lista-especialidades-sacar.component';
 import { ListaEspecialistasSacarComponent } from './componentes/lista-especialistas-sacar/lista-especialistas-sacar.component';
-
+import { TableModule } from 'ngx-easy-table';
+import { InformesComponent } from './modulos/informes/informes.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 const firebaseConfig = {
   apiKey: 'AIzaSyAE_9PLW4nIs-4aGriqtWiWw-GrfRMW0k4',
   authDomain: 'clinica-tp-utn.firebaseapp.com',
@@ -86,7 +88,8 @@ const firebaseConfig = {
     PacientesComponent,
     ListaTurnosSacarComponent,
     ListaEspecialidadesSacarComponent,
-    ListaEspecialistasSacarComponent
+    ListaEspecialistasSacarComponent,
+    InformesComponent,
 
   ],
   imports: [
@@ -104,6 +107,9 @@ const firebaseConfig = {
     provideStorage(() => getStorage()),
     BrowserAnimationsModule,
     UpperCasePipe,
+    TableModule,
+    CanvasJSAngularChartsModule
+
   ],
   providers: [StorageService, UpperCasePipe],
   bootstrap: [AppComponent],
